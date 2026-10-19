@@ -120,7 +120,7 @@ Homepage scrollytelling (`src/components/story/`): GSAP ScrollTrigger draws one 
 Must be verified before publishing (copied from the medaka-v3 reference, all marked as examples on the page):
 
 - Pricing (Firm £149, Agency £399, Enterprise from £1,200) and the feature lists under each plan. The "Start monitoring" buttons go to `/free-audit`; there is no checkout.
-- The competitor comparison (`src/components/story/AlternativesTable.tsx`): AirOps, Lumar and the agency retainer rows have unverified prices and descriptions. Each needs the supplier's own published price, the source page and the date read, or the row should be removed.
+- The homepage comparison (src/components/story/SeoComparison.tsx) is descriptive only: no third-party names, no prices, and every Medaka row restates what the audit and report already do. Check the wording with James.
 - Hero copy "Free, about a minute, no sign-up": the audit form asks for a work email, so "no sign-up" and "about a minute" need confirming.
 - "When web search is on, it runs real searches at the moment of asking" (ChatGPT section) is a claim about third-party behaviour.
 - "We keep your domain for your audit" (closing section) is a data-handling statement.
@@ -129,7 +129,8 @@ Must be verified before publishing (copied from the medaka-v3 reference, all mar
 Brand follow-ups from the workbook:
 
 - Spendesk figure on /services: add the year to "May to July" and confirm Spendesk may be named. The German-mentions figure (0% to 98%) is left out because it has no metric or period yet.
-- The comparison table on the homepage (src/components/story/AlternativesTable.tsx) names AirOps and Lumar with unverified example prices. The workbook asks not to name rivals and to date any rival claim, and its own principle is "no invention". Recommend removing it, or replacing it with sourced and dated rows.
+- Done: the competitor table (AirOps, Lumar, retainer prices) was removed to follow "no invention" and the workbook's advice not to name rivals.
+- Still invented: the example plan prices on the homepage (Firm, Agency, Enterprise) are labelled as examples, but they are not James's figures. Confirm or remove them.
 
 Still open:
 

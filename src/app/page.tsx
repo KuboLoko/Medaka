@@ -1,4 +1,4 @@
-import { AlternativesTable } from "@/components/story/AlternativesTable";
+import { SeoComparison } from "@/components/story/SeoComparison";
 import { AnswerSection } from "@/components/story/AnswerSection";
 import { CheckSection } from "@/components/story/CheckSection";
 import { GptSection } from "@/components/story/GptSection";
@@ -25,7 +25,7 @@ export default function HomePage() {
         <AnswerSection />
       </ThreadStory>
       <PricingSection />
-      <AlternativesTable />
+      <SeoComparison />
       <LoopSection />
       <CheckSection />
     </>

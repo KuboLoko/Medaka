@@ -53,7 +53,7 @@ export default function ServicesPage() {
           id="evidence-title"
           eyebrow="Evidence"
           title="One result, with its source."
-          intro="From our work with Spendesk. One client, one period. It is not a promise of the same result."
+          intro="From our work with Spendesk. One client, one period."
         />
         <figure data-reveal data-spotlight className="surface-glass mt-10 max-w-3xl p-6 sm:p-8">
           <figcaption className="text-sm text-ink-600">
@@ -64,10 +64,19 @@ export default function ServicesPage() {
             <ArrowRight aria-hidden className="h-8 w-8 text-copper-600" />
             34.5%
           </p>
-          <p className="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-ink-500">
-            May to July
-          </p>
-          <dl className="mt-6 grid gap-4 border-t border-line pt-5 text-sm sm:grid-cols-2">
+          <dl className="mt-6 grid gap-x-6 gap-y-4 border-t border-line pt-5 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="font-medium text-ink-900">Metric</dt>
+              <dd className="mt-1 text-ink-600">
+                Mention rate for the category, bottom of the funnel, across the EU.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium text-ink-900">Period</dt>
+              <dd className="mt-1 text-ink-600">
+                May to July, as shown in the dashboard.
+              </dd>
+            </div>
             <div>
               <dt className="font-medium text-ink-900">Source</dt>
               <dd className="mt-1 text-ink-600">
@@ -81,7 +90,9 @@ export default function ServicesPage() {
               </dd>
             </div>
           </dl>
-        </figure>
+          <p className="no-halo mt-6 rounded-lg border border-copper-600/40 bg-copper-600/10 px-4 py-3 text-sm font-medium text-ink-900">
+            Not a guarantee of identical outcomes.
+          </p>        </figure>
       </Section>
       <FinalCta />
     </>
