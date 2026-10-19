@@ -22,8 +22,11 @@ type Seg = {
   y: number;
   tx: number;
   ty: number;
+  /** Rotation in degrees, measured from the fish's own heading and kept within a half turn. */
   angle: number;
   smooth: number;
+  /** 1 faces left (as drawn), -1 is mirrored to face right. Mirroring keeps the dorsal side up. */
+  face: 1 | -1;
   visible: boolean;
   phase: number;
   tailPhase: number;
@@ -132,6 +135,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
           ty: 0,
           angle: 0,
           smooth: Number.NaN,
+          face: 1,
           visible: false,
           phase: Math.random() * Math.PI * 2,
           tailPhase: Math.random() * Math.PI * 2,
@@ -195,18 +199,29 @@ export function ThreadStory({ children }: { children: ReactNode }) {
         s.path.style.strokeDashoffset = `${s.len * (1 - s.p)}`;
         const d = s.len * s.p;
         const a = s.path.getPointAtLength(d);
-        const b = s.path.getPointAtLength(Math.min(s.len, d + 2));
-        const dx = b.x - a.x;
-        const dy = b.y - a.y;
+        // A window either side of the fish, so the heading is never zero at the ends of the path.
+        const before = s.path.getPointAtLength(Math.max(0, d - 3));
+        const after = s.path.getPointAtLength(Math.min(s.len, d + 3));
+        const dx = after.x - before.x;
+        const dy = after.y - before.y;
         const mag = Math.hypot(dx, dy) || 1;
         s.x = a.x;
         s.y = a.y;
         s.tx = dx / mag;
         s.ty = dy / mag;
-        s.angle = (Math.atan2(dy, dx) * 180) / Math.PI + 180;
+
+        // Face the way it is swimming. A mirrored fish is rotated from "facing right",
+        // an unmirrored one from "facing left", so it is never turned upside down.
+        const theta = (Math.atan2(dy, dx) * 180) / Math.PI;
+        let face = s.face;
+        if (dx > 0.2 * mag) face = -1;
+        else if (dx < -0.2 * mag) face = 1;
+        const turn = (v: number) => ((((v + 180) % 360) + 360) % 360) - 180;
+        s.angle = face === 1 ? turn(theta - 180) : turn(theta);
+        if (Number.isNaN(s.smooth) || face !== s.face) s.smooth = s.angle;
+        s.face = face;
         s.visible =
           s.kind === "lead" ? s.p < 0.999 : s.kind === "tip" ? s.p > 0.001 : s.p > 0.001 && s.p < 0.999;
-        if (Number.isNaN(s.smooth)) s.smooth = s.angle;
         if (!s.visible) gsap.set(s.fish, { opacity: 0 });
 
         // Dots light up behind the fish and settle to a faint trail.
@@ -375,7 +390,8 @@ export function ThreadStory({ children }: { children: ReactNode }) {
             gsap.set(s.fish, {
               x: s.x - s.ty * off,
               y: s.y + s.tx * off,
-              rotation: s.smooth + roll,
+              rotation: s.smooth + roll * s.face * -1,
+              scaleX: s.face,
               xPercent: -50,
               yPercent: -50,
               opacity: 1,

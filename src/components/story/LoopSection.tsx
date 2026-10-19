@@ -192,7 +192,8 @@ export function LoopSection() {
                 className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: "0%" }}
               >
-                <MedakaMark animated className="h-4 w-7" />
+                {/* The fish is drawn facing left. The bar runs left to right, so mirror it. */}
+                <MedakaMark animated className="h-4 w-7 -scale-x-100" />
               </div>
             </div>
             <ol className="mt-4 flex justify-between text-sm text-ink-500">
