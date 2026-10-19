@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Hanken_Grotesk } from "next/font/google";
-import { ScrollThread } from "@/components/brand/ScrollThread";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { site } from "@/lib/site";
@@ -55,7 +54,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Header />
-        <ScrollThread />
         <main id="main" className="flex-1">
           {children}
         </main>

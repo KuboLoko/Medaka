@@ -2,10 +2,10 @@ const stages = [
   { name: "Find", text: "Identify the buyer questions that matter for your firm." },
   { name: "Measure", text: "Ask the engines each month and record the answers." },
   { name: "Fix", text: "Act on the pages, content and facts that need work." },
-  { name: "Check", text: "Re-ask the same questions and see what changed." },
+  { name: "Prove", text: "Re-ask the same questions and see what changed." },
 ];
 
-/** The monthly loop: find, measure, fix, check. */
+/** The monthly loop: find, measure, fix, prove. */
 export function MonitoringLoop() {
   return (
     <ol aria-label="The monthly loop" className="grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">

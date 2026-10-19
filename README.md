@@ -77,6 +77,17 @@ The project is ready for Vercel: import the GitHub repository, set `NEXT_PUBLIC_
 
 Verified against the SEOptimist website and already applied: the five engines, company and registered-office wording (`src/lib/site.ts`), the free audit process, the public-pages statement, the five trust statements and the James Finlayson attribution.
 
+Homepage scrollytelling (`src/components/story/`): GSAP ScrollTrigger draws one thread from the hero to the ChatGPT card, splits it into four source branches and merges them into the answer, led by a small medaka. The monthly loop is pinned and scrubbed on large screens. Everything uses `gsap.matchMedia()`: below 1024px, or with `prefers-reduced-motion: reduce`, the page is a plain stacked layout with no overlay, no pin and nothing hidden. Triggers are cleaned up on unmount.
+
+Must be verified before publishing (copied from the medaka-v3 reference, all marked as examples on the page):
+
+- Pricing (Firm £149, Agency £399, Enterprise from £1,200) and the feature lists under each plan. The "Start monitoring" buttons go to `/free-audit`; there is no checkout.
+- The competitor comparison (`src/components/story/AlternativesTable.tsx`): AirOps, Lumar and the agency retainer rows have unverified prices and descriptions. Each needs the supplier's own published price, the source page and the date read, or the row should be removed.
+- Hero copy "Free, about a minute, no sign-up": the audit form asks for a work email, so "no sign-up" and "about a minute" need confirming.
+- "When web search is on, it runs real searches at the moment of asking" (ChatGPT section) is a claim about third-party behaviour.
+- "We keep your domain for your audit" (closing section) is a data-handling statement.
+- The homepage no longer shows the Platform, Services, Trust or name sections. They remain at their own routes and in the footer.
+
 Still open:
 
 - Trust: nothing is stated about data storage location, encryption, certifications, compliance frameworks or human review. Add only what the client explicitly approves (`src/components/home/TrustSection.tsx`).

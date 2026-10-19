@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { DOMAIN_KEY } from "./DomainCheck";
 import { Button } from "@/components/ui/Button";
 import { publicPagesStatement } from "@/lib/site";
 
@@ -21,6 +22,20 @@ export function AuditForm() {
   const id = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [done, setDone] = useState(false);
+  const domainRef = useRef<HTMLInputElement>(null);
+
+  // Pick up a domain typed on the homepage. It travels via sessionStorage, not the URL.
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(DOMAIN_KEY);
+      if (saved && domainRef.current) {
+        domainRef.current.value = saved;
+        sessionStorage.removeItem(DOMAIN_KEY);
+      }
+    } catch {
+      // Storage can be blocked; the field simply stays empty.
+    }
+  }, []);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -66,6 +81,7 @@ export function AuditForm() {
         </label>
         <input
           id={`${id}-domain`}
+          ref={domainRef}
           name="domain"
           type="text"
           inputMode="url"
