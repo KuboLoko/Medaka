@@ -75,8 +75,12 @@ The project is ready for Vercel: import the GitHub repository, set `NEXT_PUBLIC_
 
 ## To confirm before publishing
 
-- Exact legal wording for "Medaka is a trading name/product of SEOptimist." (`src/lib/site.ts`).
-- Trust copy (`src/components/home/TrustSection.tsx`): each statement describes approach. Check each against how the service will really work, especially data location, data handling and human review.
-- The five AI engines to name in the audit (the copy says "five AI engines" without naming them).
-- Direct contact details for `/contact`.
-- Privacy policy and terms text.
+Verified against the SEOptimist website and already applied: the five engines, company and registered-office wording (`src/lib/site.ts`), the free audit process, the public-pages statement, the five trust statements and the James Finlayson attribution.
+
+Still open:
+
+- Trust: nothing is stated about data storage location, encryption, certifications, compliance frameworks or human review. Add only what the client explicitly approves (`src/components/home/TrustSection.tsx`).
+- Monthly monitoring copy names the same five engines as the audit. Confirm the monitored engines match.
+- Direct contact details for `/contact` (email, phone, booking link). None have been invented.
+- Privacy policy and terms: placeholders only, marked "Full privacy policy and terms are being prepared."
+- Mock dashboards name the five engines with example statuses, all labelled "Example. Illustrative data."

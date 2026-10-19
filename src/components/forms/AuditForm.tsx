@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useId, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { publicPagesStatement } from "@/lib/site";
 
 type Errors = Partial<Record<"email" | "domain" | "consent", string>>;
 
@@ -120,6 +121,10 @@ export function AuditForm() {
           </p>
         )}
       </div>
+
+      <p className="text-sm leading-relaxed text-ink-600">
+        {publicPagesStatement}
+      </p>
 
       <Button type="submit" size="lg" className="w-full sm:w-auto">
         Request your free audit

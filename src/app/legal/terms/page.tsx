@@ -1,9 +1,10 @@
+import { LegalNotice } from "@/components/layout/LegalNotice";
 import { PageHero, Section } from "@/components/ui/Layout";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "Terms",
-  description: "Medaka terms of use. Placeholder pending legal review.",
+  description: "Medaka terms of use. The full terms are being prepared.",
   path: "/legal/terms",
   noindex: true,
 });
@@ -14,16 +15,12 @@ export default function TermsPage() {
       <PageHero
         eyebrow="Legal"
         title="Terms"
-        intro="Placeholder. This page will be replaced with terms reviewed by SEOptimist’s advisers before launch."
+        intro="Full privacy policy and terms are being prepared."
       />
       <Section>
-        <div className="max-w-2xl space-y-4 text-ink-700">
-          <p>
-            The final terms should cover use of the website, the free audit, the
-            members area and any monthly service, and should name the legal
-            entity that provides them.
-          </p>
-          <p>No legal text has been written here yet.</p>
+        <div className="max-w-2xl space-y-6 text-ink-600">
+          <p>This page is a placeholder. It is not a set of terms.</p>
+          <LegalNotice className="text-sm" />
         </div>
       </Section>
     </>

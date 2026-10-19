@@ -4,9 +4,9 @@ import { PageHero, Section } from "@/components/ui/Layout";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: "Data sovereignty, security and trust",
+  title: "Trust",
   description:
-    "How Medaka handles data, what it monitors and how its findings are produced. Plain statements, no exaggerated claims.",
+    "What the Medaka audit reads, what it needs from you and how its findings are shown. Plain statements, no exaggerated claims.",
   path: "/trust",
 });
 
@@ -15,12 +15,12 @@ export default function TrustPage() {
     <>
       <PageHero
         eyebrow="Trust"
-        title="Careful with data. Plain about method."
-        intro="Finance firms need to know what is collected, why, and how conclusions are reached. This page sets that out."
+        title="Plain about what the audit reads and shows."
+        intro="Finance firms need to know what is read, and how conclusions are reached. This page sets out what we can state."
       />
       <Section labelledBy="trust-principles-title">
         <h2 id="trust-principles-title" className="font-display text-3xl sm:text-4xl">
-          How we work
+          How the audit works
         </h2>
         <div className="mt-10">
           <TrustGrid />
@@ -35,13 +35,12 @@ export default function TrustPage() {
             <li>We do not claim to control what AI engines say.</li>
             <li>We do not promise rankings, traffic or revenue.</li>
             <li>
-              We do not claim certifications or compliance status that we have
-              not stated here.
+              This page states how the audit works. It makes no claims about
+              certifications or compliance frameworks.
             </li>
-            <li>AI answers vary. Every report shows when it was run.</li>
           </ul>
           <p className="mt-8 text-ink-600">
-            Questions about data handling? Ask us before you share anything.
+            Questions about how the audit works? Get in touch.
           </p>
           <div className="mt-6">
             <ButtonLink href="/contact" variant="secondary">

@@ -30,11 +30,11 @@ export const sampleAnswer = {
 };
 
 export const engines = [
-  { name: "Engine A", status: "Mentioned", level: 3 },
-  { name: "Engine B", status: "Mentioned", level: 2 },
-  { name: "Engine C", status: "Not mentioned", level: 0 },
-  { name: "Engine D", status: "Mentioned", level: 1 },
-  { name: "Engine E", status: "Not mentioned", level: 0 },
+  { name: "ChatGPT", status: "Mentioned", level: 3 },
+  { name: "Claude", status: "Mentioned", level: 2 },
+  { name: "Gemini", status: "Not mentioned", level: 0 },
+  { name: "Perplexity", status: "Mentioned", level: 1 },
+  { name: "Google AI Overviews", status: "Not mentioned", level: 0 },
 ];
 
 export const monthly = {

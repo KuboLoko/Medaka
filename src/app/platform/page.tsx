@@ -3,7 +3,7 @@ import { Monitoring } from "@/components/home/Monitoring";
 import { PlatformPoints } from "@/components/home/PlatformSection";
 import { PlatformDashboard } from "@/components/mock/PlatformDashboard";
 import { PageHero, Section } from "@/components/ui/Layout";
-import { pageMetadata } from "@/lib/site";
+import { engineSentence, pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "Platform and monthly monitoring",
@@ -18,7 +18,7 @@ export default function PlatformPage() {
       <PageHero
         eyebrow="Platform"
         title="Monthly monitoring, with the evidence behind it."
-        intro="The members area holds your results, the work covered, a facts base and a card for every page. Everything links back to the answers and sources behind it."
+        intro={`The members area holds your results, the work covered, a facts base and a card for every page. ${engineSentence}`}
       />
       <Section labelledBy="platform-demo-title">
         <h2 id="platform-demo-title" className="font-display text-3xl sm:text-4xl">

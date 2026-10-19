@@ -1,9 +1,10 @@
+import { LegalNotice } from "@/components/layout/LegalNotice";
 import { PageHero, Section } from "@/components/ui/Layout";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "Privacy policy",
-  description: "Medaka privacy policy. Placeholder pending legal review.",
+  description: "Medaka privacy policy. The full policy is being prepared.",
   path: "/legal/privacy",
   noindex: true,
 });
@@ -14,17 +15,12 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Legal"
         title="Privacy policy"
-        intro="Placeholder. This page will be replaced with a policy reviewed by SEOptimist’s advisers before launch."
+        intro="Full privacy policy and terms are being prepared."
       />
       <Section>
-        <div className="max-w-2xl space-y-4 text-ink-700">
-          <p>
-            The final policy should cover who is responsible for personal data,
-            what is collected through the audit and contact forms, why it is
-            used, how long it is kept, where it is stored and how to exercise
-            data rights.
-          </p>
-          <p>No legal text has been written here yet.</p>
+        <div className="max-w-2xl space-y-6 text-ink-600">
+          <p>This page is a placeholder. It is not a privacy policy.</p>
+          <LegalNotice className="text-sm" />
         </div>
       </Section>
     </>

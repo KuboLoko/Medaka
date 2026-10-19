@@ -1,6 +1,7 @@
 import { Section, SectionHeader } from "@/components/ui/Layout";
 import { Reveal } from "@/components/ui/Reveal";
 import { MonthlyReport } from "@/components/mock/MonthlyReport";
+import { engineSentence } from "@/lib/site";
 import { MonitoringLoop } from "./MonitoringLoop";
 
 const tracked = [
@@ -21,7 +22,7 @@ export function Monitoring() {
             id="monitoring-title"
             eyebrow="Monthly monitoring"
             title="Medaka re-asks the questions that matter each month."
-            intro="AI answers change. A single audit is a snapshot. Monthly monitoring shows what moved, and why it may have moved."
+            intro={`AI answers change, and a single audit is a snapshot. ${engineSentence} Monthly monitoring shows what moved.`}
           />
           <ul className="mt-8 grid grid-cols-1 gap-x-6 sm:grid-cols-2 lg:grid-cols-1">
             {tracked.map((t) => (

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui/Layout";
-import { footerLinks, site } from "@/lib/site";
+import { footerLinks } from "@/lib/site";
+import { LegalNotice } from "./LegalNotice";
 
 function LinkList({
   title,
@@ -43,7 +44,7 @@ export function Footer() {
           <LinkList title="Company" links={footerLinks.company} />
         </div>
         <div className="mt-14 border-t border-line pt-6 text-xs leading-relaxed text-ink-500">
-          <p>{site.legalNote}</p>
+          <LegalNotice />
           <p className="mt-2">
             © {new Date().getFullYear()} SEOptimist. All rights reserved.
           </p>
