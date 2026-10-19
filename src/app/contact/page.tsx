@@ -18,7 +18,7 @@ export default function ContactPage() {
         intro="Tell us a little about your firm and what you would like to know. A person will reply."
       />
       <Section labelledBy="contact-form-title">
-        <div className="max-w-xl">
+        <div className="light max-w-xl rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
           <h2 id="contact-form-title" className="sr-only">
             Contact form
           </h2>

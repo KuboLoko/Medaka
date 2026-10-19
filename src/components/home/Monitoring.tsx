@@ -1,6 +1,7 @@
 import { Section, SectionHeader } from "@/components/ui/Layout";
 import { Reveal } from "@/components/ui/Reveal";
 import { MonthlyReport } from "@/components/mock/MonthlyReport";
+import { MonitoringLoop } from "./MonitoringLoop";
 
 const tracked = [
   "Buyer questions tracked",
@@ -37,6 +38,9 @@ export function Monitoring() {
           <MonthlyReport />
         </Reveal>
       </div>
+      <Reveal className="mt-16">
+        <MonitoringLoop />
+      </Reveal>
     </Section>
   );
 }

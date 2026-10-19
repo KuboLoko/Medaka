@@ -41,7 +41,7 @@ export default function FreeAuditPage() {
               outcome. It reports what was found at the time it was run.
             </p>
           </div>
-          <div className="rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
+          <div className="light rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
             <h2 className="font-display text-2xl">Request your free audit</h2>
             <p className="mb-6 mt-1 text-sm text-ink-600">
               Two details are needed. The third is optional.
@@ -51,7 +51,7 @@ export default function FreeAuditPage() {
         </div>
       </Section>
 
-      <Section tone="sand" labelledBy="audit-reports-title">
+      <Section tone="raise" labelledBy="audit-reports-title">
         <h2 id="audit-reports-title" className="font-display text-3xl sm:text-4xl">
           What the audit reports
         </h2>

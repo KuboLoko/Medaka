@@ -4,17 +4,14 @@ type Props = {
   className?: string;
   /** Gently sways the tail. Respects reduced motion via CSS. */
   animated?: boolean;
-  /** Draws the fish in light tones for dark backgrounds. */
-  inverse?: boolean;
   title?: string;
 };
 
 /**
- * The medaka: a simple line fish whose eye sits high on the head.
+ * The medaka: a small orange fish whose eye sits high on the head.
  * Drawn on a 100 x 60 grid so the tail can pivot at (68, 30).
  */
-export function MedakaMark({ className, animated, inverse, title }: Props) {
-  const line = inverse ? "var(--color-paper)" : "var(--color-ink-900)";
+export function MedakaMark({ className, animated, title }: Props) {
   return (
     <svg
       viewBox="0 0 100 60"
@@ -22,29 +19,19 @@ export function MedakaMark({ className, animated, inverse, title }: Props) {
       role={title ? "img" : undefined}
       aria-label={title}
       aria-hidden={title ? undefined : true}
-      fill="none"
+      focusable="false"
     >
       <path
-        d="M8 32 C 20 12, 52 10, 70 30 C 52 52, 20 52, 8 32 Z"
-        stroke={line}
-        strokeWidth="2.6"
-        strokeLinejoin="round"
+        d="M6 32 C 20 11, 52 9, 70 30 C 52 53, 20 53, 6 32 Z"
+        fill="var(--color-flame)"
       />
       <path
         className="fish-tail"
-        d="M68 30 L 94 14 C 91 24, 91 38, 94 48 Z"
-        stroke={line}
-        strokeWidth="2.6"
-        strokeLinejoin="round"
+        d="M66 30 L 96 12 C 92 24, 92 36, 96 48 Z"
+        fill="var(--color-flame)"
       />
-      <path
-        d="M30 20 C 38 15, 48 16, 54 21"
-        stroke={line}
-        strokeWidth="2"
-        strokeLinecap="round"
-        opacity="0.55"
-      />
-      <circle cx="23" cy="23" r="4.2" fill="var(--color-copper-500)" />
+      <circle cx="24" cy="22" r="6.4" fill="#f2f2ea" />
+      <circle cx="25.5" cy="21.5" r="3" fill="#0a2013" />
     </svg>
   );
 }

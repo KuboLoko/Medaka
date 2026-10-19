@@ -15,17 +15,22 @@ export function Container({
   );
 }
 
-type Tone = "paper" | "sand" | "ink";
+/**
+ * forest: page green. raise: a slightly lighter green band. deep: the darkest green.
+ * light: a pale band (cream surface, dark text).
+ */
+type Tone = "forest" | "raise" | "deep" | "light";
 
 const tones: Record<Tone, string> = {
-  paper: "bg-paper text-ink-900",
-  sand: "bg-sand text-ink-900",
-  ink: "on-ink bg-ink-950 text-paper",
+  forest: "",
+  raise: "bg-forest-raise",
+  deep: "bg-forest-deep",
+  light: "light",
 };
 
 export function Section({
   id,
-  tone = "paper",
+  tone = "forest",
   className,
   labelledBy,
   children,
@@ -52,7 +57,6 @@ export function SectionHeader({
   eyebrow,
   title,
   intro,
-  tone = "paper",
   as: Heading = "h2",
   className,
 }: {
@@ -60,36 +64,24 @@ export function SectionHeader({
   eyebrow?: string;
   title: ReactNode;
   intro?: ReactNode;
-  tone?: Tone;
   as?: "h1" | "h2";
   className?: string;
 }) {
-  const dark = tone === "ink";
   return (
     <header className={cn("max-w-3xl", className)}>
       {eyebrow && (
-        <p
-          className={cn(
-            "mb-4 font-mono text-xs uppercase tracking-[0.14em]",
-            dark ? "text-copper-100" : "text-copper-600",
-          )}
-        >
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-copper-600">
           {eyebrow}
         </p>
       )}
       <Heading
         id={id}
-        className="font-display text-balance text-4xl font-normal leading-[1.08] sm:text-5xl"
+        className="font-display text-balance text-4xl leading-[1.06] sm:text-5xl lg:text-[3.5rem]"
       >
         {title}
       </Heading>
       {intro && (
-        <p
-          className={cn(
-            "text-pretty mt-5 text-lg leading-relaxed",
-            dark ? "text-ink-200" : "text-ink-600",
-          )}
-        >
+        <p className="text-pretty mt-5 text-lg leading-relaxed text-ink-600">
           {intro}
         </p>
       )}
@@ -110,7 +102,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <div className="border-b border-line bg-paper pt-16 pb-16 sm:pt-24 sm:pb-20">
+    <div className="border-b border-line pt-16 pb-16 sm:pt-24 sm:pb-20">
       <Container>
         <SectionHeader as="h1" eyebrow={eyebrow} title={title} intro={intro} />
         {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}

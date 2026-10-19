@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 
 export default function MembersPage() {
   return (
-    <div className="bg-paper py-16 sm:py-24">
+    <div className="py-16 sm:py-24">
       <Container>
         <div className="mx-auto max-w-md">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-copper-600">
@@ -25,7 +25,7 @@ export default function MembersPage() {
             For clients with a monthly monitoring plan. Sign-in is not switched
             on yet.
           </p>
-          <div className="mt-8 rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
+          <div className="mt-8 light rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
             <PlaceholderForm
               fields={[
                 { name: "email", label: "Work email", type: "email", autoComplete: "email", required: true },

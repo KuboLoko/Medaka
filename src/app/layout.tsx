@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { Geist, Geist_Mono, Hanken_Grotesk } from "next/font/google";
+import { ScrollThread } from "@/components/brand/ScrollThread";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { site } from "@/lib/site";
@@ -7,10 +8,10 @@ import "./globals.css";
 
 const sans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-const serif = Newsreader({
-  variable: "--font-newsreader",
+const display = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  weight: ["300", "400"],
 });
 
 export const metadata: Metadata = {
@@ -37,23 +38,24 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6f2ea",
+  themeColor: "#133620",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en-GB"
-      className={`${sans.variable} ${mono.variable} ${serif.variable}`}
+      className={`${sans.variable} ${mono.variable} ${display.variable}`}
     >
-      <body className="flex min-h-screen flex-col antialiased">
+      <body className="forest flex min-h-screen flex-col bg-paper text-ink-900 antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink-950 focus:px-4 focus:py-2 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-cream focus:px-4 focus:py-2 focus:text-[#0e2918]"
         >
           Skip to content
         </a>
         <Header />
+        <ScrollThread />
         <main id="main" className="flex-1">
           {children}
         </main>

@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /*
   TODO(client): every statement here is a statement of approach.
-  Verify each one with SEOptimist before publishing. See README, "Claims to verify".
+  Verify each one with SEOptimist before publishing. See README, "To confirm before publishing".
 */
 export const trustPoints = [
   {
@@ -33,24 +33,13 @@ export const trustPoints = [
   },
 ];
 
-export function TrustGrid({ dark }: { dark?: boolean }) {
+export function TrustGrid() {
   return (
     <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
       {trustPoints.map((p) => (
-        <div
-          key={p.title}
-          className={dark ? "border-t border-ink-700 pt-5" : "border-t border-line pt-5"}
-        >
-          <dt className="font-display text-2xl leading-tight">{p.title}</dt>
-          <dd
-            className={
-              dark
-                ? "mt-2 text-sm leading-relaxed text-ink-200"
-                : "mt-2 text-sm leading-relaxed text-ink-600"
-            }
-          >
-            {p.text}
-          </dd>
+        <div key={p.title} className="border-t border-line pt-5">
+          <dt className="font-display text-2xl font-normal leading-tight">{p.title}</dt>
+          <dd className="mt-2 text-sm leading-relaxed text-ink-600">{p.text}</dd>
         </div>
       ))}
     </dl>
@@ -59,20 +48,19 @@ export function TrustGrid({ dark }: { dark?: boolean }) {
 
 export function TrustSection() {
   return (
-    <Section id="trust" tone="ink" labelledBy="trust-title">
+    <Section id="trust" tone="deep" labelledBy="trust-title">
       <Reveal>
         <SectionHeader
           id="trust-title"
-          tone="ink"
           eyebrow="Trust and data sovereignty"
           title="Careful with data. Plain about method."
           intro="Finance firms need to know what is collected, why, and how conclusions are reached. We set that out without embellishment."
         />
       </Reveal>
       <Reveal delay={0.1} className="mt-12">
-        <TrustGrid dark />
+        <TrustGrid />
         <div className="mt-10">
-          <ButtonLink href="/trust" variant="inverse">
+          <ButtonLink href="/trust" variant="secondary">
             Read about trust
           </ButtonLink>
         </div>

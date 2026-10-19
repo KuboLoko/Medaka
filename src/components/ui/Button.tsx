@@ -2,17 +2,16 @@ import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "inverse" | "quiet";
+type Variant = "primary" | "secondary" | "quiet";
 type Size = "md" | "lg";
 
 const base =
   "inline-flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-copper-600 text-white hover:bg-copper-700",
+  primary: "bg-cta text-white hover:bg-cta-hover",
   secondary:
-    "border border-ink-900/25 text-ink-900 hover:border-ink-900 hover:bg-ink-900/5",
-  inverse: "bg-paper text-ink-950 hover:bg-white",
+    "border border-ink-900/30 text-ink-900 hover:border-ink-900 hover:bg-ink-900/10",
   quiet: "text-ink-900 hover:text-copper-600 underline-offset-4 hover:underline",
 };
 

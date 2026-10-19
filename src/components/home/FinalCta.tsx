@@ -5,11 +5,11 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function FinalCta() {
   return (
-    <Section labelledBy="final-title" className="text-center">
+    <Section tone="light" labelledBy="final-title" className="text-center">
       <Reveal>
         <h2
           id="final-title"
-          className="font-display text-balance mx-auto max-w-3xl text-4xl leading-[1.08] sm:text-6xl"
+          className="font-display text-balance mx-auto max-w-3xl text-4xl leading-[1.04] sm:text-6xl"
         >
           Understand how AI engines see your firm.
         </h2>

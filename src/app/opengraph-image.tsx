@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Medaka: see how AI engines describe your firm";
+export const alt = "medaka: see how AI engines describe your firm";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -14,24 +14,25 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0a1520",
-          color: "#f6f2ea",
+          background: "#133620",
+          color: "#f2f2ea",
           padding: 80,
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <svg width="100" height="60" viewBox="0 0 100 60" fill="none">
-            <path d="M8 32 C 20 12, 52 10, 70 30 C 52 52, 20 52, 8 32 Z" stroke="#f6f2ea" strokeWidth="3" />
-            <path d="M68 30 L 94 14 C 91 24, 91 38, 94 48 Z" stroke="#f6f2ea" strokeWidth="3" />
-            <circle cx="23" cy="23" r="4.5" fill="#c2572a" />
+          <svg width="100" height="60" viewBox="0 0 100 60">
+            <path d="M6 32 C 20 11, 52 9, 70 30 C 52 53, 20 53, 6 32 Z" fill="#f2602f" />
+            <path d="M66 30 L 96 12 C 92 24, 92 36, 96 48 Z" fill="#f2602f" />
+            <circle cx="24" cy="22" r="6.4" fill="#f2f2ea" />
+            <circle cx="25.5" cy="21.5" r="3" fill="#0a2013" />
           </svg>
-          <div style={{ fontSize: 44 }}>Medaka</div>
+          <div style={{ fontSize: 52 }}>medaka</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 76, lineHeight: 1.05, maxWidth: 900 }}>
+          <div style={{ fontSize: 80, lineHeight: 1.03, maxWidth: 940 }}>
             See how AI engines describe your firm.
           </div>
-          <div style={{ fontSize: 30, color: "#a9b4bf" }}>
+          <div style={{ fontSize: 30, color: "#b4c4b9" }}>
             AI visibility monitoring for UK finance firms. By SEOptimist.
           </div>
         </div>

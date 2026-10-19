@@ -11,7 +11,7 @@ const risks = [
 
 export function Problem() {
   return (
-    <Section tone="sand" labelledBy="problem-title">
+    <Section tone="raise" labelledBy="problem-title">
       <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
         <Reveal>
           <SectionHeader

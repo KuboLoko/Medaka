@@ -12,13 +12,13 @@ function LinkList({
 }) {
   return (
     <nav aria-label={title}>
-      <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-ink-300">
+      <h2 className="font-mono text-xs uppercase tracking-[0.14em] text-ink-500">
         {title}
       </h2>
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-sm text-paper hover:underline underline-offset-4">
+            <Link href={l.href} className="text-sm text-ink-900 hover:underline underline-offset-4">
               {l.label}
             </Link>
           </li>
@@ -30,19 +30,19 @@ function LinkList({
 
 export function Footer() {
   return (
-    <footer className="on-ink bg-ink-950 py-16 text-paper">
+    <footer className="bg-forest-deep py-16">
       <Container>
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">
-            <Logo inverse />
-            <p className="mt-5 text-sm leading-relaxed text-ink-200">
+            <Logo />
+            <p className="mt-5 text-sm leading-relaxed text-ink-600">
               Medaka by SEOptimist. AI visibility monitoring for UK finance firms.
             </p>
           </div>
           <LinkList title="Explore" links={footerLinks.explore} />
           <LinkList title="Company" links={footerLinks.company} />
         </div>
-        <div className="mt-14 border-t border-ink-700 pt-6 text-xs leading-relaxed text-ink-300">
+        <div className="mt-14 border-t border-line pt-6 text-xs leading-relaxed text-ink-500">
           <p>{site.legalNote}</p>
           <p className="mt-2">
             © {new Date().getFullYear()} SEOptimist. All rights reserved.

@@ -1,8 +1,9 @@
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import type { ReactNode } from "react";
 import { Section, SectionHeader } from "@/components/ui/Layout";
 import { Reveal } from "@/components/ui/Reveal";
 import { SourceChip } from "@/components/mock/SourceChip";
+import { River } from "@/components/brand/River";
 import { ILLUSTRATIVE } from "@/lib/site";
 
 const questions = [
@@ -12,6 +13,13 @@ const questions = [
 ];
 
 type Step = { title: string; text: string; visual: ReactNode };
+
+const sourceStates = [
+  { kind: "site" as const, label: "Your website", state: "Named", highlight: true },
+  { kind: "article" as const, label: "Industry article", state: "Cited" },
+  { kind: "directory" as const, label: "Directory listing", state: "Not chosen" },
+  { kind: "page" as const, label: "Competitor page", state: "Not chosen" },
+];
 
 const steps: Step[] = [
   {
@@ -54,12 +62,16 @@ const steps: Step[] = [
     title: "Sources",
     text: "The engine reviews web sources, including your website and others.",
     visual: (
-      <div className="flex flex-wrap gap-1.5">
-        <SourceChip kind="site" label="Your website" highlight />
-        <SourceChip kind="article" label="Industry article" />
-        <SourceChip kind="directory" label="Directory listing" />
-        <SourceChip kind="page" label="Competitor page" />
-      </div>
+      <ul className="space-y-1.5">
+        {sourceStates.map((s) => (
+          <li key={s.label} className="flex items-center justify-between gap-2">
+            <SourceChip kind={s.kind} label={s.label} highlight={s.highlight} />
+            <span className="shrink-0 font-mono text-[10px] uppercase text-ink-600">
+              {s.state}
+            </span>
+          </li>
+        ))}
+      </ul>
     ),
   },
   {
@@ -79,22 +91,24 @@ const steps: Step[] = [
     title: "Medaka",
     text: "Medaka records how your firm appears, what was cited and what to do next.",
     visual: (
-      <dl className="space-y-1.5 text-xs">
-        {[
-          ["Visibility", "Mentioned"],
-          ["Sources", "3 cited"],
-          ["Gaps", "2 found"],
-          ["Actions", "3 suggested"],
-        ].map(([k, v]) => (
-          <div
-            key={k}
-            className="flex justify-between rounded-md border border-line bg-white px-3 py-1.5"
-          >
-            <dt className="text-ink-600">{k}</dt>
-            <dd className="font-medium text-ink-950">{v}</dd>
-          </div>
-        ))}
-      </dl>
+      <div className="space-y-2">
+        <p className="font-display text-3xl leading-none text-ink-950">2 of 12</p>
+        <p className="text-xs text-ink-600">answers name the firm</p>
+        <dl className="space-y-1.5 text-xs">
+          {[
+            ["Gaps found", "2"],
+            ["Actions suggested", "3"],
+          ].map(([k, v]) => (
+            <div
+              key={k}
+              className="flex justify-between rounded-md border border-line bg-white px-3 py-1.5"
+            >
+              <dt className="text-ink-600">{k}</dt>
+              <dd className="font-medium text-ink-950">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     ),
   },
 ];
@@ -111,41 +125,38 @@ export function HowItWorks() {
         />
       </Reveal>
 
-      <ol className="mt-14 grid gap-y-12 lg:grid-cols-5 lg:gap-x-8">
-        {steps.map((s, i) => (
-          <Reveal as="li" key={s.title} delay={i * 0.12} className="relative">
-            <div
-              className={
-                i === steps.length - 1
-                  ? "h-full rounded-[var(--radius-card)] border border-copper-500/50 bg-copper-100/40 p-4"
-                  : "h-full rounded-[var(--radius-card)] border border-line bg-paper-soft p-4"
-              }
-            >
-              <p className="font-mono text-xs text-copper-600">Step {i + 1}</p>
-              <h3 className="font-display mt-1 text-2xl">{s.title}</h3>
-              <p className="mt-2 min-h-[4.5rem] text-sm leading-relaxed text-ink-600">
-                {s.text}
-              </p>
-              <div className="mt-4">{s.visual}</div>
-              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.1em] text-ink-500">
-                {ILLUSTRATIVE}
-              </p>
-            </div>
-            {i < steps.length - 1 && (
-              <>
+      <div className="relative mt-14">
+        <River className="absolute inset-x-0 top-12 z-0 hidden lg:block" />
+        <ol className="relative z-10 grid gap-y-12 lg:grid-cols-5 lg:gap-x-8">
+          {steps.map((s, i) => (
+            <Reveal as="li" key={s.title} delay={i * 0.12} className="relative">
+              <div
+                className={
+                  i === steps.length - 1
+                    ? "light h-full rounded-[var(--radius-card)] border-2 border-flame bg-paper-soft p-4"
+                    : "light h-full rounded-[var(--radius-card)] border border-line bg-paper-soft p-4"
+                }
+              >
+                <p className="font-mono text-xs text-copper-600">Step {i + 1}</p>
+                <h3 className="font-display mt-1 text-2xl font-normal">{s.title}</h3>
+                <p className="mt-2 text-sm lg:min-h-[4.5rem] leading-relaxed text-ink-600">
+                  {s.text}
+                </p>
+                <div className="mt-4">{s.visual}</div>
+                <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.1em] text-ink-500">
+                  {ILLUSTRATIVE}
+                </p>
+              </div>
+              {i < steps.length - 1 && (
                 <ArrowDown
                   aria-hidden
                   className="absolute -bottom-9 left-1/2 h-5 w-5 -translate-x-1/2 text-ink-500 lg:hidden"
                 />
-                <ArrowRight
-                  aria-hidden
-                  className="absolute top-12 -right-[1.65rem] hidden h-5 w-5 text-ink-500 lg:block"
-                />
-              </>
-            )}
-          </Reveal>
-        ))}
-      </ol>
+              )}
+            </Reveal>
+          ))}
+        </ol>
+      </div>
     </Section>
   );
 }

@@ -37,7 +37,7 @@ export function PlatformPoints() {
 
 export function PlatformSection() {
   return (
-    <Section id="platform" tone="sand" labelledBy="platform-title">
+    <Section id="platform" tone="raise" labelledBy="platform-title">
       <Reveal>
         <SectionHeader
           id="platform-title"

@@ -26,7 +26,7 @@ export default function TrustPage() {
           <TrustGrid />
         </div>
       </Section>
-      <Section tone="sand" labelledBy="trust-limits-title">
+      <Section tone="raise" labelledBy="trust-limits-title">
         <div className="max-w-3xl">
           <h2 id="trust-limits-title" className="font-display text-3xl sm:text-4xl">
             What we do not claim

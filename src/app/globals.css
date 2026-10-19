@@ -1,46 +1,120 @@
 @import "tailwindcss";
 
 /*
-  Medaka design tokens.
-  Ink = deep navy-black. Paper = warm off-white. Copper = the single accent.
-  Water = a quiet supporting tone used for "visible / positive" states in data.
+  Medaka design tokens (direction taken from the medaka-v3 reference video).
+
+  Two scopes share the same token names:
+    .forest  Page default. Deep green surface, cream text, bright orange accent.
+    .light   Pale cards and panels. Cream surface, dark green text, deep orange accent.
+
+  Components use the same utility classes (text-ink-900, bg-paper, border-line, text-copper-600)
+  in both scopes, and the scope decides what those resolve to.
 */
 @theme {
-  --color-ink-950: #0a1520;
-  --color-ink-900: #0f1d29;
-  --color-ink-800: #172a3b;
-  --color-ink-700: #27394b;
-  --color-ink-600: #435567;
-  --color-ink-500: #5a6b7b;
-  --color-ink-300: #a9b4bf;
-  --color-ink-200: #cdd4da;
+  /* Constants, identical in every scope */
+  --color-forest: #133620;
+  --color-forest-deep: #0d2818;
+  --color-forest-raise: #184429;
+  --color-cream: #e9ece5;
+  --color-cta: #c23f09;
+  --color-cta-hover: #a83506;
+  --color-flame: #f2602f;
 
-  --color-paper: #f6f2ea;
-  --color-paper-soft: #fbf9f4;
-  --color-sand: #efe9dc;
-  --color-line: #ddd5c4;
+  /* Scoped tokens. Values below are the light scope (the default for cards). */
+  --color-ink-950: #0a2013;
+  --color-ink-900: #0e2918;
+  --color-ink-800: #1b3a29;
+  --color-ink-700: #2d4a3a;
+  --color-ink-600: #44614f;
+  --color-ink-500: #587264;
+  --color-ink-300: #9fb1a6;
+  --color-ink-200: #cbd6cf;
 
-  --color-copper-700: #8a3411;
-  --color-copper-600: #a8431a;
-  --color-copper-500: #c2572a;
-  --color-copper-100: #f3dccd;
+  --color-paper: #edeee6;
+  --color-paper-soft: #f4f5ef;
+  --color-sand: #e1e4da;
+  --color-line: #cdd2c4;
 
-  --color-water-700: #1d5f66;
-  --color-water-500: #2f7f87;
-  --color-water-100: #d6e8e9;
+  --color-copper-700: #9c3007;
+  --color-copper-600: #b43806;
+  --color-copper-500: #e0541f;
+  --color-copper-100: #fbdcce;
+
+  --color-water-700: #1b6a4a;
+  --color-water-500: #2f8a68;
+  --color-water-100: #d3e9dd;
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-display: var(--font-hanken), var(--font-geist-sans), ui-sans-serif, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --radius-card: 0.75rem;
-  --shadow-card: 0 1px 2px rgb(10 21 32 / 0.04), 0 8px 24px -12px rgb(10 21 32 / 0.12);
+  --shadow-card: 0 1px 2px rgb(5 20 12 / 0.12), 0 12px 32px -14px rgb(5 20 12 / 0.45);
 }
 
 @layer base {
-  html {
-    background: var(--color-paper);
+  :root {
+    color-scheme: dark;
+  }
+
+  .forest {
+    --color-ink-950: #f2f2ea;
+    --color-ink-900: #f2f2ea;
+    --color-ink-800: #e4e8de;
+    --color-ink-700: #d0d8cf;
+    --color-ink-600: #b4c4b9;
+    --color-ink-500: #9bb0a2;
+    --color-ink-300: #6e8c7a;
+    --color-ink-200: #4d6f5b;
+
+    --color-paper: #133620;
+    --color-paper-soft: #184429;
+    --color-sand: #164028;
+    --color-line: #2a5640;
+
+    --color-copper-700: #ffa47a;
+    --color-copper-600: #ff7f4d;
+    --color-copper-500: #f2602f;
+    --color-copper-100: #ffd3bf;
+
+    --color-water-700: #84d6ae;
+    --color-water-500: #4fb98a;
+    --color-water-100: #1d5a40;
+  }
+
+  /* Re-declares the light values so a .light panel nested in .forest resets the scope. */
+  .light {
+    --color-ink-950: #0a2013;
+    --color-ink-900: #0e2918;
+    --color-ink-800: #1b3a29;
+    --color-ink-700: #2d4a3a;
+    --color-ink-600: #44614f;
+    --color-ink-500: #587264;
+    --color-ink-300: #9fb1a6;
+    --color-ink-200: #cbd6cf;
+
+    --color-paper: #edeee6;
+    --color-paper-soft: #f4f5ef;
+    --color-sand: #e1e4da;
+    --color-line: #cdd2c4;
+
+    --color-copper-700: #9c3007;
+    --color-copper-600: #b43806;
+    --color-copper-500: #e0541f;
+    --color-copper-100: #fbdcce;
+
+    --color-water-700: #1b6a4a;
+    --color-water-500: #2f8a68;
+    --color-water-100: #d3e9dd;
+
+    color-scheme: light;
+    background-color: var(--color-paper);
     color: var(--color-ink-900);
+  }
+
+  html {
+    background: var(--color-forest);
+    color: #f2f2ea;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -62,8 +136,8 @@
   }
 
   ::selection {
-    background: var(--color-copper-100);
-    color: var(--color-ink-950);
+    background: var(--color-flame);
+    color: #0a2013;
   }
 
   :focus-visible {
@@ -71,17 +145,14 @@
     outline-offset: 3px;
     border-radius: 2px;
   }
-
-  .on-ink :focus-visible {
-    outline-color: var(--color-paper);
-  }
 }
 
 @layer utilities {
+  /* Light, tightly tracked sans for headlines, as in the reference. */
   .font-display {
-    font-family: var(--font-serif);
-    font-optical-sizing: auto;
-    letter-spacing: -0.015em;
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: -0.035em;
   }
 
   .text-balance {
@@ -97,10 +168,10 @@
 @keyframes tail-sway {
   0%,
   100% {
-    transform: rotate(-7deg);
+    transform: rotate(-8deg);
   }
   50% {
-    transform: rotate(7deg);
+    transform: rotate(8deg);
   }
 }
 
@@ -135,12 +206,12 @@
 }
 
 .fish-live .fish-tail {
-  animation: tail-sway 3.2s ease-in-out infinite;
+  animation: tail-sway 1.8s ease-in-out infinite;
 }
 
 .fish-hover:hover .fish-tail,
 .fish-hover:focus-visible .fish-tail {
-  animation: tail-sway 1.6s ease-in-out infinite;
+  animation: tail-sway 1s ease-in-out infinite;
 }
 
 .fish-drift {

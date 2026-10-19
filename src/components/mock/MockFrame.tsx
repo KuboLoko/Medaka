@@ -22,7 +22,7 @@ export function MockFrame({
   return (
     <figure
       className={cn(
-        "overflow-hidden rounded-[var(--radius-card)] border border-line bg-paper-soft text-ink-900 shadow-[var(--shadow-card)]",
+        "light overflow-hidden rounded-[var(--radius-card)] border border-line bg-paper-soft text-ink-900 shadow-[var(--shadow-card)]",
         className,
       )}
     >

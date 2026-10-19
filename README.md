@@ -55,7 +55,7 @@ src/
 
 ## Design system
 
-Tokens live in `src/app/globals.css` under `@theme`: ink (navy-black), paper (warm off-white), copper (single accent), water (quiet supporting tone). Headlines use Newsreader, UI text uses Geist.
+Direction follows the medaka-v3 reference video: deep forest green, cream text, a single orange accent, a lowercase wordmark and light, tightly tracked headlines (Hanken Grotesk). Tokens live in `src/app/globals.css`. Two scopes share the same token names: `.forest` (page default) and `.light` (pale cards and panels), so components use the same classes in both.
 
 Every mock interface is rendered inside `MockFrame`, which always shows an "Illustrative data" label. Sample content is in `src/components/mock/data.ts` and uses generic placeholders such as "Firm A", never real firm names.
 
