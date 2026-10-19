@@ -26,7 +26,7 @@ export function HeroSection() {
                 medaka
               </p>
               <p className="mt-4 flex items-center gap-2.5 text-sm font-medium text-ink-800">
-                <MedakaMark animated className="h-4 w-7" />
+                <MedakaMark animated eyes className="h-4 w-7" />
                 AI visibility monitoring, by SEOptimist
               </p>
             </div>

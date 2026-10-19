@@ -78,6 +78,27 @@ Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/lay
 - `Interactions`: one pair of listeners gives every `[data-spotlight]` card a cursor-following light and every `[data-magnetic]` button a spring-back pull. Mouse only.
 
 Rules kept: every effect lives in `gsap.matchMedia()` or `gsap.context()`, so tweens, triggers, set values, the ticker and listeners are reverted on unmount. Reduced motion gets the finished state with nothing hidden or animated. The thread overlay, pin and particles are desktop only. `will-change` is used only on the moving fish.
+## Brand rules
+
+From James Finlayson's Brand DNA workbook (2026-10-18) and brand notes (2026-10-11). Nothing in those documents is marked as locked, so only the settled parts are applied.
+
+Applied:
+
+- **Lockup:** the name is never shown without its descriptor and the fish. The header and footer lockup is the fish, "medaka" and "AI visibility monitoring" (`src/components/brand/Logo.tsx`).
+- **Voice:** the company stays plain and precise, because finance buyers are cautious. The personality is carried by the fish and not by the copy. So far that means a wordless trait: the fish's pupil follows the cursor (`data-fish-eyes`, mouse only, off for reduced motion). The 404 page is plain, with the fish and no dialogue.
+- **Standards** (Trust page): show the evidence, report the full result, no invention, proof before promise, tested code where it can be tested. They describe how results are reported, not outcomes.
+- **Belief and working relationship** (Services page): good SEO is necessary but not sufficient for AI, and you deal with James directly.
+- **Evidence** (Services page): the Spendesk result, with metric, period and source.
+- **Visual taste:** frosted glass icons and surfaces (`GlassIcon`, `.surface-glass`).
+
+Not used yet, on purpose:
+
+- "The one-stop 360 for brand reputation" and the bylines "Medaka by SEOptimist: see it, fix it, prove it". The notes list them as candidates. They also say "360" and "reputation" overlap with HR review tools and PR monitoring, so the phrase must be checked against search results and AI answers first.
+- The data side of the description ("and where your data goes"). The Trust page states nothing about data location, security or compliance until the client approves it.
+- The Tesla reference. The notes record that it is inaccurate; "builds the machine in his head first" is the accurate version if it is ever used.
+- Named rivals and the retired line "everyone else stops at the dashboard". The notes say to criticise the habit, not named rivals, and to date any rival claim before use.
+
+Open questions for James: where the fish speaks (empty states, loading screen, footer, about page), and whether it ever speaks in a sentence.
 ## Forms
 
 The audit, contact and members forms are UI only. They validate, then state plainly that nothing was sent or stored. Connect them to a server action or email provider in a later phase.
@@ -104,6 +125,11 @@ Must be verified before publishing (copied from the medaka-v3 reference, all mar
 - "When web search is on, it runs real searches at the moment of asking" (ChatGPT section) is a claim about third-party behaviour.
 - "We keep your domain for your audit" (closing section) is a data-handling statement.
 - The homepage no longer shows the Platform, Services, Trust or name sections. They remain at their own routes and in the footer.
+
+Brand follow-ups from the workbook:
+
+- Spendesk figure on /services: add the year to "May to July" and confirm Spendesk may be named. The German-mentions figure (0% to 98%) is left out because it has no metric or period yet.
+- The comparison table on the homepage (src/components/story/AlternativesTable.tsx) names AirOps and Lumar with unverified example prices. The workbook asks not to name rivals and to date any rival claim, and its own principle is "no invention". Recommend removing it, or replacing it with sourced and dated rows.
 
 Still open:
 

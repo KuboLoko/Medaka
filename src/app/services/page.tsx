@@ -1,6 +1,7 @@
+import { ArrowRight } from "lucide-react";
 import { FinalCta } from "@/components/home/FinalCta";
 import { ServiceGrid } from "@/components/home/ServicesSection";
-import { PageHero, Section } from "@/components/ui/Layout";
+import { PageHero, Section, SectionHeader } from "@/components/ui/Layout";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata({
@@ -27,6 +28,60 @@ export default function ServicesPage() {
           Scope, deliverables and timings are agreed with each firm. Get in touch
           to talk through what would be useful.
         </p>
+      </Section>
+
+      {/* Belief and working relationship: from James Finlayson's Brand DNA workbook, 2026-10-18. */}
+      <Section tone="raise" labelledBy="belief-title">
+        <SectionHeader
+          id="belief-title"
+          eyebrow="What we believe"
+          title="Good SEO is necessary, but not sufficient for AI."
+          intro="It is one discipline, not a replacement. Your existing team is the right team, and is missing one measurement."
+        />
+        <p data-reveal className="mt-8 max-w-2xl text-lg text-ink-800">
+          You deal with James Finlayson directly.
+        </p>
+      </Section>
+
+      {/*
+        TODO(client) before publishing: add the year to "May to July", and confirm Spendesk may be
+        named. The figure comes from Spendesk's own dashboard, as recorded in the proof inventory.
+        The workbook's German-mentions figure (0% to 98%) has no period or metric yet, so it is left out.
+      */}
+      <Section labelledBy="evidence-title">
+        <SectionHeader
+          id="evidence-title"
+          eyebrow="Evidence"
+          title="One result, with its source."
+          intro="From our work with Spendesk. One client, one period. It is not a promise of the same result."
+        />
+        <figure data-reveal data-spotlight className="surface-glass mt-10 max-w-3xl p-6 sm:p-8">
+          <figcaption className="text-sm text-ink-600">
+            Category mentions across the EU, bottom of the funnel
+          </figcaption>
+          <p className="font-display mt-3 flex flex-wrap items-center gap-x-4 text-5xl leading-none sm:text-6xl">
+            17.7%
+            <ArrowRight aria-hidden className="h-8 w-8 text-copper-600" />
+            34.5%
+          </p>
+          <p className="mt-4 font-mono text-xs uppercase tracking-[0.12em] text-ink-500">
+            May to July
+          </p>
+          <dl className="mt-6 grid gap-4 border-t border-line pt-5 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="font-medium text-ink-900">Source</dt>
+              <dd className="mt-1 text-ink-600">
+                Spendesk’s own dashboard, which credits the content work.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium text-ink-900">Behind it</dt>
+              <dd className="mt-1 text-ink-600">
+                50 new articles across four markets, and 39 refreshed.
+              </dd>
+            </div>
+          </dl>
+        </figure>
       </Section>
       <FinalCta />
     </>

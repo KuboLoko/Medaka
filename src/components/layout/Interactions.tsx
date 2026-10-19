@@ -54,6 +54,19 @@ export function Interactions() {
           card.style.setProperty("--my", `${e.clientY - r.top}px`);
         }
 
+        // The fish watches the cursor. The pupil moves a hair's breadth towards it.
+        document.querySelectorAll<SVGElement>("svg[data-fish-eyes]").forEach((fish) => {
+          const r = fish.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) return;
+          const dx = e.clientX - (r.left + r.width * 0.25);
+          const dy = e.clientY - (r.top + r.height * 0.37);
+          const dist = Math.hypot(dx, dy) || 1;
+          // The pupil can travel about 3 units inside the eye before it leaves the white.
+          const reach = Math.min(1, dist / 220) * 3;
+          fish.style.setProperty("--ex", `${(dx / dist) * reach}px`);
+          fish.style.setProperty("--ey", `${(dy / dist) * reach}px`);
+        });
+
         document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
           const r = el.getBoundingClientRect();
           const cx = r.left + r.width / 2;

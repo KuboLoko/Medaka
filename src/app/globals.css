@@ -567,3 +567,16 @@ body :is(h1, h2, h3, p, dt, dd, li) {
     animation: none;
   }
 }
+
+/* The pupil of a fish with eyes follows the cursor. Values are set by Interactions. */
+svg[data-fish-eyes] .fish-pupil {
+  transform: translate(var(--ex, 0px), var(--ey, 0px));
+  transition: transform 0.14s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  svg[data-fish-eyes] .fish-pupil {
+    transform: none;
+    transition: none;
+  }
+}

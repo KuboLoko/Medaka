@@ -1,4 +1,4 @@
-import { TrustGrid } from "@/components/home/TrustSection";
+import { StandardsGrid, TrustGrid } from "@/components/home/TrustSection";
 import { ButtonLink } from "@/components/ui/Button";
 import { PageHero, Section } from "@/components/ui/Layout";
 import { pageMetadata } from "@/lib/site";
@@ -26,7 +26,15 @@ export default function TrustPage() {
           <TrustGrid />
         </div>
       </Section>
-      <Section tone="raise" labelledBy="trust-limits-title">
+      <Section tone="raise" labelledBy="trust-standards-title">
+        <h2 data-reveal id="trust-standards-title" className="font-display text-3xl sm:text-4xl">
+          Standards we hold
+        </h2>
+        <div className="mt-10">
+          <StandardsGrid />
+        </div>
+      </Section>
+      <Section labelledBy="trust-limits-title">
         <div data-reveal className="max-w-3xl">
           <h2 id="trust-limits-title" className="font-display text-3xl sm:text-4xl">
             What we do not claim

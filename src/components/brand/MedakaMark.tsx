@@ -4,6 +4,8 @@ type Props = {
   className?: string;
   /** Gently sways the tail. Respects reduced motion via CSS. */
   animated?: boolean;
+  /** The pupil follows the cursor (mouse only, no reduced motion). Wordless, so the fish never has to speak. */
+  eyes?: boolean;
   title?: string;
 };
 
@@ -11,7 +13,7 @@ type Props = {
  * The medaka: a small orange fish whose eye sits high on the head.
  * Drawn on a 100 x 60 grid so the tail can pivot at (68, 30).
  */
-export function MedakaMark({ className, animated, title }: Props) {
+export function MedakaMark({ className, animated, eyes, title }: Props) {
   return (
     <svg
       viewBox="0 0 100 60"
@@ -20,6 +22,7 @@ export function MedakaMark({ className, animated, title }: Props) {
       aria-label={title}
       aria-hidden={title ? undefined : true}
       focusable="false"
+      {...(eyes ? { "data-fish-eyes": "" } : {})}
     >
       <path
         d="M6 32 C 20 11, 52 9, 70 30 C 52 53, 20 53, 6 32 Z"
@@ -31,7 +34,7 @@ export function MedakaMark({ className, animated, title }: Props) {
         fill="var(--color-flame)"
       />
       <circle cx="24" cy="22" r="6.4" fill="#f2f2ea" />
-      <circle cx="25.5" cy="21.5" r="3" fill="#0a2013" />
+      <circle className="fish-pupil" cx="25.5" cy="21.5" r="3" fill="#0a2013" />
     </svg>
   );
 }
