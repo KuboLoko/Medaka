@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/*
+  Medaka design tokens.
+  Ink = deep navy-black. Paper = warm off-white. Copper = the single accent.
+  Water = a quiet supporting tone used for "visible / positive" states in data.
+*/
+@theme {
+  --color-ink-950: #0a1520;
+  --color-ink-900: #0f1d29;
+  --color-ink-800: #172a3b;
+  --color-ink-700: #27394b;
+  --color-ink-600: #435567;
+  --color-ink-500: #5a6b7b;
+  --color-ink-300: #a9b4bf;
+  --color-ink-200: #cdd4da;
+
+  --color-paper: #f6f2ea;
+  --color-paper-soft: #fbf9f4;
+  --color-sand: #efe9dc;
+  --color-line: #ddd5c4;
+
+  --color-copper-700: #8a3411;
+  --color-copper-600: #a8431a;
+  --color-copper-500: #c2572a;
+  --color-copper-100: #f3dccd;
+
+  --color-water-700: #1d5f66;
+  --color-water-500: #2f7f87;
+  --color-water-100: #d6e8e9;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-card: 0.75rem;
+  --shadow-card: 0 1px 2px rgb(10 21 32 / 0.04), 0 8px 24px -12px rgb(10 21 32 / 0.12);
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink-900);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  ::selection {
+    background: var(--color-copper-100);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-copper-600);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-ink :focus-visible {
+    outline-color: var(--color-paper);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Medaka fish: tail sway and sight-line flow. Purely decorative. */
+@keyframes tail-sway {
+  0%,
+  100% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes sight-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.fish-tail {
+  transform-origin: 68px 30px;
+}
+
+.fish-live .fish-tail {
+  animation: tail-sway 3.2s ease-in-out infinite;
+}
+
+.fish-hover:hover .fish-tail,
+.fish-hover:focus-visible .fish-tail {
+  animation: tail-sway 1.6s ease-in-out infinite;
+}
+
+.fish-drift {
+  animation: drift 6s ease-in-out infinite;
+}
+
+.sight-line {
+  stroke-dasharray: 4 8;
+  animation: sight-flow 2.4s linear infinite;
+}
+
+.pulse-dot {
+  animation: soft-pulse 1.4s ease-in-out infinite;
+}
+
+.pulse-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.pulse-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fish-live .fish-tail,
+  .fish-hover:hover .fish-tail,
+  .fish-drift,
+  .sight-line,
+  .pulse-dot {
+    animation: none;
+  }
+
+  .pulse-dot {
+    opacity: 0.7;
+  }
+}
