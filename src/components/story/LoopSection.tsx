@@ -172,7 +172,10 @@ export function LoopSection() {
                   <p className="text-pretty mt-5 max-w-lg text-lg text-ink-600">{s.text}</p>
                   <span className="sr-only">Step {i + 1} of {stages.length}</span>
                 </div>
-                <div className="max-w-xl">{s.card}</div>
+                <div className="relative max-w-xl">
+                  <div aria-hidden className="glow -inset-x-16 -inset-y-14 opacity-60" />
+                  <div className="relative">{s.card}</div>
+                </div>
               </li>
             ))}
           </ol>

@@ -25,7 +25,7 @@ export default function MembersPage() {
             For clients with a monthly monitoring plan. Sign-in is not switched
             on yet.
           </p>
-          <div className="mt-8 light rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
+          <div className="mt-8 light surface-light p-6 sm:p-8">
             <PlaceholderForm
               fields={[
                 { name: "email", label: "Work email", type: "email", autoComplete: "email", required: true },

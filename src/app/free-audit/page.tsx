@@ -55,7 +55,7 @@ export default function FreeAuditPage() {
           </div>
           <div
             id="request"
-            className="light self-start rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8"
+            className="light self-start surface-light p-6 sm:p-8"
           >
             <h2 className="font-display text-2xl">Request your free audit</h2>
             <p className="mb-6 mt-1 text-sm text-ink-600">

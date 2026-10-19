@@ -65,6 +65,7 @@ export function DomainCheck({
         />
         <button
           type="submit"
+          data-magnetic
           className="inline-flex h-12 items-center justify-center rounded-md bg-cta px-6 text-base font-medium text-white transition-colors hover:bg-cta-hover"
         >
           {buttonLabel}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Layout";
+import { SplitHeading } from "@/components/ui/SplitHeading";
 import { cn } from "@/lib/cn";
 
 /*
@@ -69,12 +70,11 @@ export function PricingSection() {
     <section id="monitoring" aria-labelledby="keep-title" className="py-20 sm:py-28">
       <Container>
         <div data-reveal className="max-w-2xl">
-          <h2
+          <SplitHeading
             id="keep-title"
+            text="Keep watching, every month"
             className="font-display text-balance text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]"
-          >
-            Keep watching, every month
-          </h2>
+          />
           <p className="text-pretty mt-5 text-lg text-ink-600">
             The free check answers one question once. Monitoring asks the full
             set of buyer questions every month, shows who was named instead of
@@ -112,13 +112,21 @@ export function PricingSection() {
 
         <ul data-reveal className="mt-8 grid gap-5 lg:grid-cols-3">
           {plans.map((p) => (
-            <li
-              key={p.id}
-              className={cn(
-                "light flex flex-col rounded-[var(--radius-card)] border bg-paper-soft p-6 shadow-[var(--shadow-card)] transition-shadow",
-                selected === p.id ? "border-flame ring-2 ring-flame" : "border-line",
-              )}
-            >
+            <li key={p.id} className="relative">
+              <span
+                aria-hidden
+                className={cn(
+                  "glow -inset-x-24 -inset-y-20 -z-10 transition-opacity duration-700 motion-reduce:transition-none",
+                  selected === p.id ? "opacity-100" : "opacity-0",
+                )}
+              />
+              <div
+                data-spotlight
+                className={cn(
+                  "light surface-light relative flex h-full flex-col p-6 transition-transform duration-500 motion-reduce:transition-none",
+                  selected === p.id && "-translate-y-1 !border-flame ring-2 ring-flame",
+                )}
+              >
               <p className="text-xs text-ink-600">{p.segment}</p>
               <h3 className="font-display mt-3 text-2xl font-normal">{p.name}</h3>
               <p className="font-display mt-2 text-5xl leading-none text-ink-950">
@@ -138,6 +146,7 @@ export function PricingSection() {
               <div className="mt-6">
                 <ButtonLink href={p.href}>{p.cta}</ButtonLink>
               </div>
+              </div>
             </li>
           ))}
         </ul>
@@ -147,7 +156,7 @@ export function PricingSection() {
         </p>
 
         <ul data-reveal className="mt-14 grid gap-5 lg:grid-cols-3">
-          <li className="light rounded-[var(--radius-card)] border border-line bg-paper-soft p-5">
+          <li data-spotlight className="light surface-light p-5">
             <p className="inline-block rounded bg-[#0e2918] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em] text-[#f4f2eb]">
               With Medaka
             </p>
@@ -170,7 +179,7 @@ export function PricingSection() {
             </p>
           </li>
 
-          <li className="light rounded-[var(--radius-card)] border border-line bg-paper-soft p-5">
+          <li data-spotlight className="light surface-light p-5">
             <p className="inline-block rounded bg-[#0e2918] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em] text-[#f4f2eb]">
               With Medaka
             </p>
@@ -196,7 +205,7 @@ export function PricingSection() {
             </p>
           </li>
 
-          <li className="light rounded-[var(--radius-card)] border border-line bg-paper-soft p-5">
+          <li data-spotlight className="light surface-light p-5">
             <p className="inline-block rounded bg-[#0e2918] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.06em] text-[#f4f2eb]">
               With Medaka
             </p>

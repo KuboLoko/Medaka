@@ -70,7 +70,7 @@ export function FreeAudit() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="light rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
+          <div className="light surface-light p-6 sm:p-8">
             <h3 className="font-display text-2xl">Request your free audit</h3>
             <p className="mb-6 mt-1 text-sm text-ink-600">
               Two details are needed. The third is optional.

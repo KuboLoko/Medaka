@@ -3,41 +3,55 @@
 import { useLayoutEffect, useRef } from "react";
 import { DomainCheck } from "@/components/forms/DomainCheck";
 import { Container } from "@/components/ui/Layout";
+import { SplitHeading } from "@/components/ui/SplitHeading";
 import { MedakaMark } from "@/components/brand/MedakaMark";
 import { gsap, MOTION_ANY } from "@/lib/gsap";
 import { publicPagesStatement } from "@/lib/site";
 
 /**
- * The light close. The cream panel opens out as the section arrives,
- * then the domain form fades in. With reduced motion it is simply there.
+ * The light close. A cream dome rises from the bottom edge of the section as it arrives:
+ * a curved mask that widens until the whole panel is revealed, with a faint warm light
+ * along its rim. The heading and the domain form then settle in. With reduced motion the
+ * finished cream section is simply there.
  */
 export function CheckSection() {
   const root = useRef<HTMLElement>(null);
   const bg = useRef<HTMLDivElement>(null);
+  const rim = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const el = root.current;
-    if (!el || !bg.current || !content.current) return;
-    const mm = gsap.matchMedia();
+    if (!el || !bg.current || !content.current || !rim.current) return;
+    const mm = gsap.matchMedia(el);
     mm.add(MOTION_ANY, () => {
       gsap.fromTo(
         bg.current,
-        { clipPath: "inset(16% 7% 0% 7% round 40px)" },
+        { clipPath: "ellipse(62% 0% at 50% 100%)" },
         {
-          clipPath: "inset(0% 0% 0% 0% round 0px)",
+          clipPath: "ellipse(150% 118% at 50% 100%)",
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 95%", end: "top 30%", scrub: true },
+          scrollTrigger: { trigger: el, start: "top 100%", end: "top 12%", scrub: true },
+        },
+      );
+      gsap.fromTo(
+        rim.current,
+        { opacity: 0.9, scaleY: 0.2 },
+        {
+          opacity: 0,
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top 100%", end: "top 12%", scrub: true },
         },
       );
       gsap.fromTo(
         content.current,
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 65%", end: "top 30%", scrub: true },
+          scrollTrigger: { trigger: el, start: "top 62%", end: "top 24%", scrub: true },
         },
       );
     });
@@ -45,17 +59,27 @@ export function CheckSection() {
   }, []);
 
   return (
-    <section id="check" ref={root} aria-labelledby="check-title" className="relative">
+    <section
+      id="check"
+      ref={root}
+      aria-labelledby="check-title"
+      className="relative flex min-h-[92vh] items-center overflow-hidden"
+    >
       <div ref={bg} aria-hidden className="light absolute inset-0" />
-      <div ref={content} className="light relative bg-transparent py-24 sm:py-32">
+      <div
+        ref={rim}
+        aria-hidden
+        className="glow inset-x-[-10%] bottom-0 h-[70%] origin-bottom"
+        style={{ opacity: 0 }}
+      />
+      <div ref={content} className="light relative w-full bg-transparent py-24 sm:py-32">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <h2
+            <SplitHeading
               id="check-title"
+              text="Which answers name you?"
               className="font-display text-balance text-4xl leading-[1.04] sm:text-6xl"
-            >
-              Which answers name you?
-            </h2>
+            />
             <p className="mx-auto mt-5 max-w-lg text-lg text-ink-600">
               We read only your public pages. We keep your domain for your audit.
             </p>

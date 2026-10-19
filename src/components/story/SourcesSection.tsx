@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Layout";
+import { SplitHeading } from "@/components/ui/SplitHeading";
 import { ILLUSTRATIVE } from "@/lib/site";
 import { Status, type SourceState } from "./Status";
 
@@ -82,12 +83,11 @@ export function SourcesSection() {
     >
       <Container>
         <div data-reveal className="max-w-md">
-          <h2
+          <SplitHeading
             id="sources-title"
+            text="It reads sources, not only your website."
             className="font-display text-balance text-3xl leading-[1.08] sm:text-4xl"
-          >
-            It reads sources, not only your website.
-          </h2>
+          />
           <p className="mt-4 text-ink-600">
             Reddit threads, LinkedIn pages and the sites of your rivals are read
             next to yours.
@@ -104,11 +104,15 @@ export function SourcesSection() {
             <li
               key={c.source}
               data-anchor={`src-${i + 1}`}
-              className="light rounded-[var(--radius-card)] border border-line bg-paper-soft p-4 shadow-[var(--shadow-card)]"
+              data-spotlight
+              className="light surface-light p-4"
             >
+              <span data-ripple aria-hidden className="ripple-ring" />
               <div className="flex items-center justify-between gap-2 border-b border-line pb-2.5">
                 <p className="text-xs font-medium text-ink-700">{c.source}</p>
-                <Status state={c.state} />
+                <span data-badge className="inline-block">
+                  <Status state={c.state} />
+                </span>
               </div>
               <div className="pt-3">{c.body}</div>
             </li>

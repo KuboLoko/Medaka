@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Hanken_Grotesk } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { Interactions } from "@/components/layout/Interactions";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -54,7 +55,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <Header />
-        <main id="main" className="flex-1">
+        <Interactions />
+        <main id="main" className="flex-1 overflow-x-clip">
           {children}
         </main>
         <Footer />

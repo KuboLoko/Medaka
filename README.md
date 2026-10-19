@@ -61,6 +61,20 @@ Every mock interface is rendered inside `MockFrame`, which always shows an "Illu
 
 Motion is restrained: scroll reveals (Framer Motion) and a small CSS tail sway on the fish. Both honour `prefers-reduced-motion`.
 
+## Depth and motion
+
+Atmosphere: a tiled SVG film grain on one fixed layer (`body::after`, no blend mode), warm `.glow` blooms behind the answer box, the ChatGPT card, the loop cards and the selected pricing plan, layered card shadows (`--shadow-card`), `.surface-light` for pale cards and `.surface-glass` (translucent, `backdrop-filter`) for dark ones. Inside `.forest`, `--color-line` is a translucent white, so every hairline reads as a glass edge.
+
+Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/layout/Interactions.tsx`):
+
+- `SplitHeading`: words or characters wrapped for a staggered rise. The hero plays as pure CSS at load. Section titles are revealed by GSAP on scroll. The heading keeps an `aria-label` and the spans are `aria-hidden`.
+- `ThreadStory`: the medaka turns with the curve, drifts, and beats its tail faster when you scroll faster. Dots along the thread light up as it passes. Once a branch arrives, light pulses run along it, a ripple leaves the card and its status badge pops in. Hovering a card repeats the ripple.
+- `ChatStream`: the prompt types, the search chips appear and the answer streams in word by word, scrubbed by scroll.
+- Engine table: row highlight and a glow on the engine mark on hover, and counters that tick up (`data-tick`).
+- `CheckSection`: a curved cream mask (an ellipse clip-path) rises over the forest canvas.
+- `Interactions`: one pair of listeners gives every `[data-spotlight]` card a cursor-following light and every `[data-magnetic]` button a spring-back pull. Mouse only.
+
+Rules kept: every effect lives in `gsap.matchMedia()` or `gsap.context()`, so tweens, triggers, set values, the ticker and listeners are reverted on unmount. Reduced motion gets the finished state with nothing hidden or animated. The thread overlay, pin and particles are desktop only. `will-change` is used only on the moving fish.
 ## Forms
 
 The audit, contact and members forms are UI only. They validate, then state plainly that nothing was sent or stored. Connect them to a server action or email provider in a later phase.

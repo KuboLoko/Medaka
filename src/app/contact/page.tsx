@@ -20,7 +20,7 @@ export default function ContactPage() {
       />
       <Section labelledBy="contact-form-title">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,36rem)_1fr] lg:gap-20">
-          <div className="light self-start rounded-[var(--radius-card)] border border-line bg-paper-soft p-6 shadow-[var(--shadow-card)] sm:p-8">
+          <div className="light self-start surface-light p-6 sm:p-8">
             <h2 id="contact-form-title" className="sr-only">
               Contact form
             </h2>

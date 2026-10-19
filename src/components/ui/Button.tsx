@@ -35,8 +35,13 @@ export function ButtonLink({
   children,
   ...style
 }: StyleProps & { href: string; children: ReactNode }) {
+  const magnetic = (style.variant ?? "primary") === "primary";
   return (
-    <Link href={href} className={buttonClasses(style)}>
+    <Link
+      href={href}
+      className={buttonClasses(style)}
+      data-magnetic={magnetic ? "" : undefined}
+    >
       {children}
     </Link>
   );
@@ -52,6 +57,7 @@ export function Button({
   return (
     <button
       className={buttonClasses({ variant, size, className })}
+      data-magnetic={(variant ?? "primary") === "primary" ? "" : undefined}
       {...rest}
     >
       {children}

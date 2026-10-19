@@ -76,7 +76,7 @@ export function Header() {
               See how it works
             </Link>
           )}
-          <Link href={cta.href} className={pill}>
+          <Link href={cta.href} className={pill} data-magnetic>
             {cta.label}
           </Link>
         </div>

@@ -1,6 +1,7 @@
 import { MedakaMark } from "@/components/brand/MedakaMark";
 import { BuyerFigure } from "@/components/brand/BuyerFigure";
 import { Container } from "@/components/ui/Layout";
+import { SplitHeading } from "@/components/ui/SplitHeading";
 
 export function HeroSection() {
   return (
@@ -8,12 +9,14 @@ export function HeroSection() {
       <Container className="pb-24 pt-12 sm:pt-20 lg:pb-44">
         <div className="grid items-center gap-14 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <div>
-            <h1
+            <SplitHeading
+              as="h1"
               id="hero-title"
+              text="Do your buyers see you?"
+              mode="chars"
+              trigger="load"
               className="font-display text-balance text-[3.2rem] leading-[0.98] sm:text-7xl lg:text-[5.5rem]"
-            >
-              Do your buyers see you?
-            </h1>
+            />
             <p className="text-pretty mt-6 max-w-md text-lg leading-relaxed text-ink-600 sm:text-xl">
               Ask ChatGPT who to hire in your field and see who it names. Free,
               about a minute, no sign-up.
