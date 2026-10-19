@@ -65,6 +65,8 @@ Motion is restrained: scroll reveals (Framer Motion) and a small CSS tail sway o
 
 Atmosphere: a tiled SVG film grain on one fixed layer (`body::after`, no blend mode), warm `.glow` blooms behind the answer box, the ChatGPT card, the loop cards and the selected pricing plan, layered card shadows (`--shadow-card`), `.surface-light` for pale cards and `.surface-glass` (translucent, `backdrop-filter`) for dark ones. Inside `.forest`, `--color-line` is a translucent white, so every hairline reads as a glass edge.
 
+Background: the dark sections carry a vector tile of faint wavy strata lines (`--texture` in `globals.css`, about 14 KB, sharp at any pixel density) plus soft light patches that repeat down the page. The light sections stay clean. It is static, with no scripts and no animation.
+
 Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/layout/Interactions.tsx`):
 
 - `SplitHeading`: words or characters wrapped for a staggered rise. The hero plays as pure CSS at load. Section titles are revealed by GSAP on scroll. The heading keeps an `aria-label` and the spans are `aria-hidden`.
