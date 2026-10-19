@@ -31,7 +31,7 @@ export const services = [
 
 export function ServiceGrid() {
   return (
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul data-reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => (
         <li key={s.title} data-spotlight className="surface-glass p-6">
           <h3 className="font-display text-2xl leading-tight">{s.title}</h3>

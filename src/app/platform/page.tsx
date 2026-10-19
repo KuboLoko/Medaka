@@ -21,10 +21,10 @@ export default function PlatformPage() {
         intro={`The members area holds your results, the work covered, a facts base and a card for every page. ${engineSentence}`}
       />
       <Section labelledBy="platform-demo-title">
-        <h2 id="platform-demo-title" className="font-display text-3xl sm:text-4xl">
+        <h2 data-reveal id="platform-demo-title" className="font-display text-3xl sm:text-4xl">
           The members area
         </h2>
-        <p className="mt-3 max-w-2xl text-ink-600">
+        <p data-reveal className="mt-3 max-w-2xl text-ink-600">
           Select a section to see an example.
         </p>
         <div className="mt-10">

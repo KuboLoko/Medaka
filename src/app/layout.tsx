@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Hanken_Grotesk } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Interactions } from "@/components/layout/Interactions";
+import { Reveals } from "@/components/story/Reveals";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -58,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <Interactions />
         <main id="main" className="flex-1 overflow-x-clip">
-          {children}
+          <Reveals>{children}</Reveals>
         </main>
         <Footer />
       </body>

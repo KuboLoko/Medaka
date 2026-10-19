@@ -504,12 +504,12 @@ body {
 
 .waves::before {
   background-image: var(--waves-a);
-  animation: waves-left 170s linear infinite;
+  animation: waves-left 60s linear infinite;
 }
 
 .waves::after {
   background-image: var(--waves-b);
-  animation: waves-right 240s linear infinite;
+  animation: waves-right 90s linear infinite;
 }
 
 @keyframes waves-left {

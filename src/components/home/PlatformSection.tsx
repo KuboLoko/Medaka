@@ -24,7 +24,7 @@ export const platformPoints = [
 
 export function PlatformPoints() {
   return (
-    <dl className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+    <dl data-reveal className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
       {platformPoints.map((p) => (
         <div key={p.title} className="border-t border-line pt-4">
           <dt className="font-display text-xl">{p.title}</dt>

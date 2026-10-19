@@ -8,7 +8,7 @@ const stages = [
 /** The monthly loop: find, measure, fix, prove. */
 export function MonitoringLoop() {
   return (
-    <ol aria-label="The monthly loop" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ol data-reveal aria-label="The monthly loop" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {stages.map((s, i) => (
         <li key={s.name} data-spotlight className="surface-glass p-5">
           <p className="font-mono text-xs text-copper-600">0{i + 1}</p>

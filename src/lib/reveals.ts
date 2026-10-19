@@ -1,23 +1,57 @@
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 /**
- * Scroll reveals shared by the homepage wrappers. Call inside a gsap.matchMedia()
- * callback that is already limited to "no reduced motion", so that nothing here ever
- * runs for people who asked for none, and the markup stays in its final state.
+ * Scroll reveals. Call inside a gsap.matchMedia() callback that is already limited to
+ * "no reduced motion", so nothing here runs for people who asked for none and the
+ * markup stays in its final state.
  *
- *   [data-reveal]  fades up once as it arrives
+ *   [data-reveal]  floats in as it arrives, like something drifting up through water:
+ *                  it rises, sways from side to side with a swing that dies away, and
+ *                  settles exactly in place. The motion is tied to the scroll and eased
+ *                  with a little lag, and it plays once, so what has arrived stays put.
  *   [data-split]   staggers the words or characters made by <SplitHeading>
  *   [data-tick]    counts up to its own value once, e.g. data-tick="6"
  */
+
+const RISE = 72; // px the block starts below its place
+const SWAY = 22; // px of side-to-side swing at the start
+
 export function setupReveals(root: HTMLElement) {
-  gsap.utils.toArray<HTMLElement>("[data-reveal]", root).forEach((node) => {
-    gsap.from(node, {
-      opacity: 0,
-      y: 28,
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: { trigger: node, start: "top 88%", once: true },
+  gsap.utils.toArray<HTMLElement>("[data-reveal]", root).forEach((node, i) => {
+    const side = i % 2 === 0 ? 1 : -1;
+    const state = { p: 0 };
+    // A block that is already in place when the page loads can finish while it is still being
+    // set up, so completion must not depend on the tween variable existing yet.
+    let done = false;
+    const handle: { trigger?: ScrollTrigger } = {};
+
+    const apply = () => {
+      if (done) return;
+      const p = state.p;
+      const rise = 1 - Math.pow(1 - p, 3); // power3.out: quick at first, then it slows to a stop
+      const x = SWAY * side * (1 - p) * Math.cos(p * Math.PI * 2.5); // swings, and the swing fades to nothing
+      gsap.set(node, {
+        x,
+        y: (1 - rise) * RISE,
+        rotation: x * 0.06,
+        opacity: Math.min(1, p * 2.4),
+      });
+    };
+
+    apply();
+    const tween = gsap.to(state, {
+      p: 1,
+      ease: "none",
+      onUpdate: apply,
+      onComplete: () => {
+        done = true;
+        gsap.set(node, { clearProps: "transform,opacity" });
+        handle.trigger?.kill();
+      },
+      scrollTrigger: { trigger: node, start: "top 98%", end: "top 60%", scrub: 0.9 },
     });
+    handle.trigger = tween.scrollTrigger;
+    if (done) handle.trigger?.kill();
   });
 
   gsap.utils.toArray<HTMLElement>("[data-split]", root).forEach((node) => {

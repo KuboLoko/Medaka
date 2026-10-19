@@ -3,7 +3,6 @@
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 import { MedakaMark } from "@/components/brand/MedakaMark";
 import { gsap, ScrollTrigger, MOTION_ANY, MOTION_DESKTOP } from "@/lib/gsap";
-import { setupReveals } from "@/lib/reveals";
 
 type Dot = { el: SVGCircleElement; t: number };
 
@@ -62,8 +61,6 @@ export function ThreadStory({ children }: { children: ReactNode }) {
     const mm = gsap.matchMedia(el);
 
     mm.add(MOTION_ANY, () => {
-      setupReveals(el);
-
       // "Named in 2 of 12 answers" becomes "Named in 1 of 6 answers" as the report arrives.
       const counter = el.querySelector<HTMLElement>("[data-count]");
       if (!counter) return undefined;

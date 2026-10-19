@@ -32,7 +32,7 @@ export const trustPoints = [
 
 export function TrustGrid() {
   return (
-    <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+    <dl data-reveal className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
       {trustPoints.map((p) => (
         <div key={p.title} className="border-t border-line pt-5">
           <dt className="font-display text-2xl font-normal leading-tight">{p.title}</dt>

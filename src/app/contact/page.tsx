@@ -36,7 +36,7 @@ export default function ContactPage() {
             />
           </div>
 
-          <aside aria-label="Who to contact" className="max-w-sm">
+          <aside data-reveal aria-label="Who to contact" className="max-w-sm">
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-copper-600">
               Medaka by SEOptimist
             </p>

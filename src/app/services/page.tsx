@@ -23,7 +23,7 @@ export default function ServicesPage() {
           Services
         </h2>
         <ServiceGrid />
-        <p className="mt-8 max-w-2xl text-sm text-ink-600">
+        <p data-reveal className="mt-8 max-w-2xl text-sm text-ink-600">
           Scope, deliverables and timings are agreed with each firm. Get in touch
           to talk through what would be useful.
         </p>

@@ -19,7 +19,7 @@ export default function TrustPage() {
         intro="Finance firms need to know what is read, and how conclusions are reached. This page sets out what we can state."
       />
       <Section labelledBy="trust-principles-title">
-        <h2 id="trust-principles-title" className="font-display text-3xl sm:text-4xl">
+        <h2 data-reveal id="trust-principles-title" className="font-display text-3xl sm:text-4xl">
           How the audit works
         </h2>
         <div className="mt-10">
@@ -27,7 +27,7 @@ export default function TrustPage() {
         </div>
       </Section>
       <Section tone="raise" labelledBy="trust-limits-title">
-        <div className="max-w-3xl">
+        <div data-reveal className="max-w-3xl">
           <h2 id="trust-limits-title" className="font-display text-3xl sm:text-4xl">
             What we do not claim
           </h2>

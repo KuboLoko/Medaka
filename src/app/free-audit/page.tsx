@@ -41,7 +41,7 @@ export default function FreeAuditPage() {
 
       <Section labelledBy="audit-form-title">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          <div>
+          <div data-reveal>
             <h2 id="audit-form-title" className="font-display text-3xl">
               How the audit works
             </h2>
@@ -67,10 +67,10 @@ export default function FreeAuditPage() {
       </Section>
 
       <Section tone="raise" labelledBy="audit-reports-title">
-        <h2 id="audit-reports-title" className="font-display text-3xl sm:text-4xl">
+        <h2 data-reveal id="audit-reports-title" className="font-display text-3xl sm:text-4xl">
           What the audit shows
         </h2>
-        <dl className="mt-10 grid gap-x-10 gap-y-6 sm:grid-cols-2">
+        <dl data-reveal className="mt-10 grid gap-x-10 gap-y-6 sm:grid-cols-2">
           {reports.map(([t, d]) => (
             <div key={t} className="border-t border-line pt-4">
               <dt className="font-display text-xl">{t}</dt>
