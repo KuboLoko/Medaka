@@ -152,7 +152,7 @@ export function LoopSection() {
       ref={root}
       data-loop="static"
       aria-labelledby="loop-title"
-      className="bg-forest-deep"
+      className="tone-deep"
     >
       <div className="loop-stage py-20 sm:py-28">
         <Container>
@@ -163,7 +163,7 @@ export function LoopSection() {
             {stages.map((s, i) => (
               <li key={s.key} className="loop-item grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
                 <div>
-                  <p className="inline-block rounded bg-cream px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[#0e2918]">
+                  <p className="no-halo inline-block rounded bg-cream px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[#0e2918]">
                     {s.key}
                   </p>
                   <h3 className="font-display text-balance mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]">

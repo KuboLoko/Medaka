@@ -14,7 +14,7 @@ export function GptSection() {
         <div className="mx-auto max-w-xl text-center">
           <p
             data-reveal
-            className="inline-block rounded bg-cream px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[#0e2918]"
+            className="no-halo inline-block rounded bg-cream px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[#0e2918]"
           >
             ChatGPT
           </p>

@@ -31,7 +31,7 @@ function LinkList({
 
 export function Footer() {
   return (
-    <footer className="bg-forest-deep py-16">
+    <footer className="tone-deep py-16">
       <Container>
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">

@@ -65,7 +65,7 @@ Motion is restrained: scroll reveals (Framer Motion) and a small CSS tail sway o
 
 Atmosphere: a tiled SVG film grain on one fixed layer (`body::after`, no blend mode), warm `.glow` blooms behind the answer box, the ChatGPT card, the loop cards and the selected pricing plan, layered card shadows (`--shadow-card`), `.surface-light` for pale cards and `.surface-glass` (translucent, `backdrop-filter`) for dark ones. Inside `.forest`, `--color-line` is a translucent white, so every hairline reads as a glass edge.
 
-Background: the dark sections carry a vector tile of faint wavy strata lines (`--texture` in `globals.css`, about 14 KB, sharp at any pixel density) plus soft light patches that repeat down the page. The light sections stay clean. It is static, with no scripts and no animation.
+Background: two fixed layers of faint wave lines (vector tiles, about 14 KB, sharp at any pixel density) slide sideways in opposite directions at about 8 and 6 px a second (`.waves` in `globals.css`). Only `transform` is animated, and each tile loops seamlessly. The tinted bands (`tone-raise`, `tone-deep`) are translucent so the waves show through, and the light sections stay clean. Headings and copy carry a soft halo in the band's own colour (`--scrim`) so the lines fade out right behind the text. Panels and chips with their own background opt out with `no-halo`, `.light` or `.surface-glass`. With reduced motion the waves stay still.
 
 Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/layout/Interactions.tsx`):
 

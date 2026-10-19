@@ -23,8 +23,8 @@ type Tone = "forest" | "raise" | "deep" | "light";
 
 const tones: Record<Tone, string> = {
   forest: "",
-  raise: "bg-forest-raise",
-  deep: "bg-forest-deep",
+  raise: "tone-raise",
+  deep: "tone-deep",
   light: "light",
 };
 

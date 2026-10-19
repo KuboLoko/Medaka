@@ -3,7 +3,7 @@ import { ILLUSTRATIVE } from "@/lib/site";
 /** The start of the story: a buyer and the question they put to an AI engine. */
 export function BuyerFigure() {
   return (
-    <figure className="overflow-hidden rounded-[var(--radius-card)] border border-line bg-forest-raise">
+    <figure className="no-halo overflow-hidden rounded-[var(--radius-card)] border border-line bg-forest-raise">
       <svg
         viewBox="0 0 300 230"
         className="block h-auto w-full"

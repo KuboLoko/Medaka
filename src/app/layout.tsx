@@ -47,7 +47,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en-GB"
       className={`${sans.variable} ${mono.variable} ${display.variable}`}
     >
-      <body className="forest flex min-h-screen flex-col bg-paper text-ink-900 antialiased">
+      <body className="forest flex min-h-screen flex-col text-ink-900 antialiased">
+        <div aria-hidden className="waves" />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-cream focus:px-4 focus:py-2 focus:text-[#0e2918]"
