@@ -16,21 +16,21 @@ export function Container({
 }
 
 /**
- * forest: page green. raise: a slightly lighter green band. deep: the darkest green.
- * light: a pale band (cream surface, dark text).
+ * page: the plain page. raise: a soft warm-grey band. deep: a deep charcoal band with light text.
+ * light: a pale panel (used to reset the scope inside a charcoal band).
  */
-type Tone = "forest" | "raise" | "deep" | "light";
+type Tone = "page" | "raise" | "deep" | "light";
 
 const tones: Record<Tone, string> = {
-  forest: "",
+  page: "",
   raise: "tone-raise",
-  deep: "tone-deep",
+  deep: "slate",
   light: "light",
 };
 
 export function Section({
   id,
-  tone = "forest",
+  tone = "page",
   className,
   labelledBy,
   children,

@@ -55,7 +55,7 @@ src/
 
 ## Design system
 
-Direction follows the medaka-v3 reference video: deep forest green, cream text, a single orange accent, a lowercase wordmark and light, tightly tracked headlines (Hanken Grotesk). Tokens live in `src/app/globals.css`. Two scopes share the same token names: `.forest` (page default) and `.light` (pale cards and panels), so components use the same classes in both.
+Direction (2026-10-20): the reference video from James explained only the logical flow of the audit. Its look was a crude mockup and is not copied. The visual design is a crisp, high-trust editorial light theme for UK finance directors: warm off-white paper with soft warm and cool light patches, pure white frosted glass, deep slate ink, one vibrant medaka orange, light Hanken Grotesk headlines and Geist body. Tokens live in `src/app/globals.css`. The `:root` values are the light page. Two scopes override them: `.slate` (a deep charcoal band, used for the closing call to action and the footer) and `.light` (resets to the light values for a pale panel placed inside a `.slate` band). Components use the same classes everywhere and the scope decides what they resolve to.
 
 Every mock interface is rendered inside `MockFrame`, which always shows an "Illustrative data" label. Sample content is in `src/components/mock/data.ts` and uses generic placeholders such as "Firm A", never real firm names.
 
@@ -63,9 +63,9 @@ Motion is restrained: scroll reveals (Framer Motion) and a small CSS tail sway o
 
 ## Depth and motion
 
-Atmosphere: a tiled SVG film grain on one fixed layer (`body::after`, no blend mode), warm `.glow` blooms behind the answer box, the ChatGPT card, the loop cards and the selected pricing plan, layered card shadows (`--shadow-card`), `.surface-light` for pale cards and `.surface-glass` (translucent, `backdrop-filter`) for dark ones. Inside `.forest`, `--color-line` is a translucent white, so every hairline reads as a glass edge.
+Atmosphere: a very light tiled SVG film grain on one fixed layer (`body::after`, no blend mode), soft orange `.glow` blooms behind the answer box and the ChatGPT card, and layered soft card shadows (`--shadow-card`). `.surface-light` and `.surface-glass` are frosted glass (translucent white, `backdrop-filter`) and switch to a dark glass inside `.slate`. Cards with `data-spotlight` light up their own edge in orange where the cursor is, with a faint glow inside.
 
-Background: two fixed layers of faint wave lines (vector tiles, about 14 KB, sharp at any pixel density) slide sideways in opposite directions at about 24 and 16 px a second (60 s and 90 s per tile) (`.waves` in `globals.css`). Only `transform` is animated, and each tile loops seamlessly. The tinted bands (`tone-raise`, `tone-deep`) are translucent so the waves show through, and the light sections stay clean. Headings and copy carry a soft halo in the band's own colour (`--scrim`) so the lines fade out right behind the text. Panels and chips with their own background opt out with `no-halo`, `.light` or `.surface-glass`. With reduced motion the waves stay still.
+Background: two fixed layers of faint slate wave lines (vector tiles, sharp at any pixel density) slide sideways in opposite directions at about 24 and 16 px a second (60 s and 90 s per tile, `.waves` in `globals.css`). Only `transform` is animated and each tile loops seamlessly. The soft warm-grey band (`tone-raise`) is translucent so the waves and the light patches show through. With reduced motion the waves stay still.
 
 Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/layout/Interactions.tsx`):
 
@@ -74,7 +74,7 @@ Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/lay
 - `ThreadStory`: the medaka turns with the curve, drifts, and beats its tail faster when you scroll faster. Dots along the thread light up as it passes. Once a branch arrives, light pulses run along it, a ripple leaves the card and its status badge pops in. Hovering a card repeats the ripple.
 - `ChatStream`: the prompt types, the search chips appear and the answer streams in word by word, scrubbed by scroll.
 - Engine table: row highlight and a glow on the engine mark on hover, and counters that tick up (`data-tick`).
-- `CheckSection`: a curved cream mask (an ellipse clip-path) rises over the forest canvas.
+- `CheckSection`: a curved charcoal mask (an ellipse clip-path) rises over the light page and carries the closing call to action.
 - `Interactions`: one pair of listeners gives every `[data-spotlight]` card a cursor-following light and every `[data-magnetic]` button a spring-back pull. Mouse only.
 
 Rules kept: every effect lives in `gsap.matchMedia()` or `gsap.context()`, so tweens, triggers, set values, the ticker and listeners are reverted on unmount. Reduced motion gets the finished state with nothing hidden or animated. The thread overlay, pin and particles are desktop only. `will-change` is used only on the moving fish.
@@ -119,7 +119,7 @@ Homepage scrollytelling (`src/components/story/`): GSAP ScrollTrigger draws one 
 
 Must be verified before publishing (copied from the medaka-v3 reference, all marked as examples on the page):
 
-- Pricing (Firm £149, Agency £399, Enterprise from £1,200) and the feature lists under each plan. The "Start monitoring" buttons go to `/free-audit`; there is no checkout.
+- Plan pricing was removed from the homepage to follow the principle of no invention. Do not reintroduce prices until James supplies them.
 - The homepage comparison (src/components/story/SeoComparison.tsx) is descriptive only: no third-party names, no prices, and every Medaka row restates what the audit and report already do. Check the wording with James.
 - Hero copy "Free, about a minute, no sign-up": the audit form asks for a work email, so "no sign-up" and "about a minute" need confirming.
 - "When web search is on, it runs real searches at the moment of asking" (ChatGPT section) is a claim about third-party behaviour.
@@ -130,7 +130,7 @@ Brand follow-ups from the workbook:
 
 - Spendesk figure on /services: add the year to "May to July" and confirm Spendesk may be named. The German-mentions figure (0% to 98%) is left out because it has no metric or period yet.
 - Done: the competitor table (AirOps, Lumar, retainer prices) was removed to follow "no invention" and the workbook's advice not to name rivals.
-- Still invented: the example plan prices on the homepage (Firm, Agency, Enterprise) are labelled as examples, but they are not James's figures. Confirm or remove them.
+- Done: the homepage no longer shows plan prices. Its flow is: hero, the buyer question, the live web search, the synthesised answer and citations, the multi-engine table, the monthly loop with a value summary and an SEO comparison, and the free audit call to action.
 
 Still open:
 

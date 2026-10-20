@@ -21,7 +21,7 @@ const stages = [
             "Which firm should a family office hire for [your service]?",
             "What should I look for in a [your service] provider?",
           ].map((q, i) => (
-            <li key={q} className={i === 3 ? "rounded bg-[#0e2918] px-3 py-2 text-[#f4f2eb]" : "rounded bg-sand px-3 py-2"}>
+            <li key={q} className={i === 3 ? "rounded bg-night px-3 py-2 text-cream" : "rounded bg-sand px-3 py-2"}>
               {q}
             </li>
           ))}
@@ -152,7 +152,7 @@ export function LoopSection() {
       ref={root}
       data-loop="static"
       aria-labelledby="loop-title"
-      className="tone-deep"
+      className="tone-raise"
     >
       <div className="loop-stage py-20 sm:py-28">
         <Container>
@@ -163,7 +163,7 @@ export function LoopSection() {
             {stages.map((s, i) => (
               <li key={s.key} className="loop-item grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
                 <div>
-                  <p className="no-halo inline-block rounded bg-cream px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[#0e2918]">
+                  <p className="inline-block rounded bg-night px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-cream">
                     {s.key}
                   </p>
                   <h3 className="font-display text-balance mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]">

@@ -14,22 +14,22 @@ export function GptSection() {
         <div className="mx-auto max-w-xl text-center">
           <p
             data-reveal
-            className="no-halo inline-block rounded bg-cream px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[#0e2918]"
+            className="inline-block rounded bg-night px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-cream"
           >
-            ChatGPT
+            The buyer question
           </p>
           <SplitHeading
             id="gpt-title"
-            text="How an AI answer is made"
+            text="It starts with a question."
             className="font-display text-balance mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]"
           />
           <div data-reveal className="mt-10 space-y-8">
             <div>
-              <h3 className="text-lg font-medium text-ink-900">A buyer asks a question.</h3>
+              <h3 className="text-lg font-medium text-ink-900">A buyer asks an AI engine.</h3>
               <p className="text-pretty mt-2 text-ink-600">
-                A finance director types: Which UK firms would you recommend for
-                [your service]? This is the kind of question a buyer can now put
-                to an assistant.
+                A finance director types a question into an assistant such as
+                ChatGPT: Which UK firms would you recommend for [your service]?
+                This is the kind of question a buyer can now put to an assistant.
               </p>
             </div>
             <div>
@@ -45,7 +45,7 @@ export function GptSection() {
         </div>
 
         <div data-anchor="gpt" className="relative mx-auto mt-14 max-w-xl lg:mt-28">
-          <div aria-hidden className="glow -inset-x-24 -inset-y-20 opacity-70" />
+          <div aria-hidden className="glow -inset-x-24 -inset-y-20 opacity-60" />
           <div className="relative">
             <ChatStream />
           </div>

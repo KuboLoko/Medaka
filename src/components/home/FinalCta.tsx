@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function FinalCta() {
   return (
-    <Section tone="light" labelledBy="final-title" className="text-center">
+    <Section tone="deep" labelledBy="final-title" className="text-center">
       <Reveal>
         <h2
           id="final-title"

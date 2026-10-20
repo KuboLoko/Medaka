@@ -13,8 +13,8 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
  *   [data-tick]    counts up to its own value once, e.g. data-tick="6"
  */
 
-const RISE = 72; // px the block starts below its place
-const SWAY = 22; // px of side-to-side swing at the start
+const RISE = 52; // px the block starts below its place
+const SWAY = 14; // px of side-to-side swing at the start
 
 export function setupReveals(root: HTMLElement) {
   gsap.utils.toArray<HTMLElement>("[data-reveal]", root).forEach((node, i) => {

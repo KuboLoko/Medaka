@@ -65,14 +65,14 @@ export function CheckSection() {
       aria-labelledby="check-title"
       className="relative flex min-h-[92vh] items-center overflow-hidden"
     >
-      <div ref={bg} aria-hidden className="light absolute inset-0" />
+      <div ref={bg} aria-hidden className="slate absolute inset-0" />
       <div
         ref={rim}
         aria-hidden
         className="glow inset-x-[-10%] bottom-0 h-[70%] origin-bottom"
         style={{ opacity: 0 }}
       />
-      <div ref={content} className="light relative w-full bg-transparent py-24 sm:py-32">
+      <div ref={content} className="slate relative w-full bg-transparent py-24 sm:py-32">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
             <SplitHeading

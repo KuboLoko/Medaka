@@ -69,7 +69,7 @@ export function AnswerSection() {
             </div>
 
             <div data-reveal>
-              <Status state="Named" className="!bg-cream !text-[#0e2918]" />
+              <Status state="Named" className="!bg-night !text-cream" />
               <SplitHeading
                 id="answer-title"
                 text="The answer is written."
@@ -95,7 +95,7 @@ export function AnswerSection() {
         <Container>
           <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
             <div data-reveal className="min-w-0">
-              <Status state="Named" className="!bg-cream !text-[#0e2918]" />
+              <Status state="Named" className="!bg-night !text-cream" />
               <h2
                 id="report-title"
                 data-count
@@ -147,7 +147,7 @@ export function AnswerSection() {
                             <span className="flex items-center gap-2">
                               <span
                                 aria-hidden
-                                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#0e2918] font-mono text-[9px] text-[#f4f2eb] transition-shadow duration-300 group-hover:shadow-[0_0_0_2px_rgb(240_106_37/0.55),0_0_16px_rgb(240_106_37/0.7)]"
+                                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-night font-mono text-[9px] text-cream transition-shadow duration-300 group-hover:shadow-[0_0_0_2px_rgb(240_106_37/0.55),0_0_16px_rgb(240_106_37/0.7)]"
                               >
                                 {r.mark}
                               </span>

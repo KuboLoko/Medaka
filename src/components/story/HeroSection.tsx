@@ -12,14 +12,14 @@ export function HeroSection() {
             <SplitHeading
               as="h1"
               id="hero-title"
-              text="Do your buyers see you?"
+              text="Do your buyers see you when they ask AI?"
               mode="chars"
               trigger="load"
-              className="font-display text-balance text-[3.2rem] leading-[0.98] sm:text-7xl lg:text-[5.5rem]"
+              className="font-display text-balance text-[2.7rem] leading-[1.03] sm:text-6xl lg:text-[4.4rem]"
             />
             <p className="text-pretty mt-6 max-w-md text-lg leading-relaxed text-ink-600 sm:text-xl">
-              Ask ChatGPT who to hire in your field and see who it names. Free,
-              about a minute, no sign-up.
+              Ask ChatGPT who to hire in your field and see who it names. Then run
+              a free audit to see how five AI engines answer for your firm.
             </p>
             <div className="mt-14">
               <p className="font-display text-[4.5rem] leading-none sm:text-[6.5rem]">

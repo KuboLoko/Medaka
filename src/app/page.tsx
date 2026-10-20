@@ -4,7 +4,7 @@ import { CheckSection } from "@/components/story/CheckSection";
 import { GptSection } from "@/components/story/GptSection";
 import { HeroSection } from "@/components/story/HeroSection";
 import { LoopSection } from "@/components/story/LoopSection";
-import { PricingSection } from "@/components/story/PricingSection";
+import { ValueSummary } from "@/components/story/ValueSummary";
 import { SourcesSection } from "@/components/story/SourcesSection";
 import { ThreadStory } from "@/components/story/ThreadStory";
 import { pageMetadata, site } from "@/lib/site";
@@ -24,9 +24,9 @@ export default function HomePage() {
         <SourcesSection />
         <AnswerSection />
       </ThreadStory>
-      <PricingSection />
-      <SeoComparison />
       <LoopSection />
+      <ValueSummary />
+      <SeoComparison />
       <CheckSection />
     </>
   );

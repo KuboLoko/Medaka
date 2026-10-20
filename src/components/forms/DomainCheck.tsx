@@ -59,8 +59,8 @@ export function DomainCheck({
           className={cn(
             "h-12 min-w-0 flex-1 rounded-md border px-4 text-base",
             tone === "light"
-              ? "border-[#0e2918]/30 bg-white text-[#0e2918] placeholder:text-[#587264]"
-              : "border-[#0e2918]/20 bg-[#f4f2eb] text-[#0e2918] placeholder:text-[#587264]",
+              ? "border-[#131c27]/25 bg-white text-[#0e1620] placeholder:text-[#5b6a7e]"
+              : "border-[#131c27]/20 bg-[#f4f2eb] text-[#0e1620] placeholder:text-[#5b6a7e]",
           )}
         />
         <button

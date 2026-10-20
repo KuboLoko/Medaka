@@ -441,7 +441,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
               key={id}
               data-path={id}
               stroke="var(--color-ink-900)"
-              strokeOpacity="0.9"
+              strokeOpacity="0.6"
               strokeWidth={id === "main" ? 3 : 2.5}
               strokeLinecap="round"
               fill="none"

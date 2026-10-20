@@ -90,7 +90,7 @@ export default function ServicesPage() {
               </dd>
             </div>
           </dl>
-          <p className="no-halo mt-6 rounded-lg border border-copper-600/40 bg-copper-600/10 px-4 py-3 text-sm font-medium text-ink-900">
+          <p className="mt-6 rounded-lg border border-copper-600/40 bg-copper-600/10 px-4 py-3 text-sm font-medium text-ink-900">
             Not a guarantee of identical outcomes.
           </p>        </figure>
       </Section>

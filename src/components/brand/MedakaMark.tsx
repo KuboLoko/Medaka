@@ -34,7 +34,7 @@ export function MedakaMark({ className, animated, eyes, title }: Props) {
         fill="var(--color-flame)"
       />
       <circle cx="24" cy="22" r="6.4" fill="#f2f2ea" />
-      <circle className="fish-pupil" cx="25.5" cy="21.5" r="3" fill="#0a2013" />
+      <circle className="fish-pupil" cx="25.5" cy="21.5" r="3" fill="#0e1620" />
     </svg>
   );
 }
