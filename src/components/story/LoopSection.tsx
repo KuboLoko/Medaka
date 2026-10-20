@@ -123,18 +123,26 @@ export function LoopSection() {
       };
       setActive(0);
 
+      // The pin holds the stage in place. A second, smoothed scrub drives the bar and the
+      // stage changes, so they glide with a soft lag and the hand-over between stages never snaps.
       ScrollTrigger.create({
         trigger: stage,
         start: "top top",
         end: "+=320%",
         pin: true,
-        scrub: true,
         anticipatePin: 1,
-        onUpdate: (self) => {
-          setActive(Math.min(stages.length - 1, Math.floor(self.progress * stages.length)));
-          gsap.set(fill, { scaleX: self.progress });
-          gsap.set(marker, { left: `${self.progress * 100}%` });
+      });
+
+      const progress = { p: 0 };
+      gsap.to(progress, {
+        p: 1,
+        ease: "none",
+        onUpdate: () => {
+          setActive(Math.min(stages.length - 1, Math.floor(progress.p * stages.length)));
+          gsap.set(fill, { scaleX: progress.p });
+          gsap.set(marker, { left: `${progress.p * 100}%` });
         },
+        scrollTrigger: { trigger: stage, start: "top top", end: "+=320%", scrub: 0.8 },
       });
 
       return () => {

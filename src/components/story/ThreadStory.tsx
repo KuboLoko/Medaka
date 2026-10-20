@@ -10,7 +10,7 @@ type Seg = {
   path: SVGPathElement;
   fish: HTMLElement;
   tail: SVGElement | null;
-  kind: "lead" | "tip" | "merge";
+  kind: "lead" | "tip" | "merge" | "out";
   index: number;
   len: number;
   p: number;
@@ -26,7 +26,8 @@ type Seg = {
   smooth: number;
   /** 1 faces left (as drawn), -1 is mirrored to face right. Mirroring keeps the dorsal side up. */
   face: 1 | -1;
-  visible: boolean;
+  /** 0 to 1. The fish fades at the ends of its path, so it hands over to the next without a jump. */
+  alpha: number;
   phase: number;
   tailPhase: number;
   reached: boolean;
@@ -74,7 +75,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
         b: 6,
         ease: "none",
         onUpdate: write,
-        scrollTrigger: { trigger: counter, start: "top 92%", end: "top 45%", scrub: true },
+        scrollTrigger: { trigger: counter, start: "top 92%", end: "top 45%", scrub: 0.8 },
       });
       return () => {
         counter.textContent = "Named in 1 of 6 answers";
@@ -133,7 +134,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
           angle: 0,
           smooth: Number.NaN,
           face: 1,
-          visible: false,
+          alpha: 0,
           phase: Math.random() * Math.PI * 2,
           tailPhase: Math.random() * Math.PI * 2,
           reached: false,
@@ -144,6 +145,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
         make(pick(`[data-path="branch-${i}"]`), pick(`[data-fish="branch-${i}"]`), "tip", i);
         make(pick(`[data-path="merge-${i}"]`), pick(`[data-fish="merge-${i}"]`), "merge", i);
       });
+      make(pick('[data-path="out"]'), pick('[data-fish="out"]'), "out", 5);
 
       const dotLayer = document.createElementNS(SVG_NS, "g");
       svg.appendChild(dotLayer);
@@ -217,9 +219,14 @@ export function ThreadStory({ children }: { children: ReactNode }) {
         s.angle = face === 1 ? turn(theta - 180) : turn(theta);
         if (Number.isNaN(s.smooth) || face !== s.face) s.smooth = s.angle;
         s.face = face;
-        s.visible =
-          s.kind === "lead" ? s.p < 0.999 : s.kind === "tip" ? s.p > 0.001 : s.p > 0.001 && s.p < 0.999;
-        if (!s.visible) gsap.set(s.fish, { opacity: 0 });
+        const edge = (v: number) => Math.min(1, Math.max(0, v));
+        s.alpha =
+          s.kind === "lead"
+            ? edge((1 - s.p) / 0.05)
+            : s.kind === "tip"
+              ? edge(s.p / 0.05)
+              : edge(s.p / 0.05) * edge((1 - s.p) / 0.06);
+        if (s.alpha <= 0.01) gsap.set(s.fish, { opacity: 0 });
 
         // Dots light up behind the fish and settle to a faint trail.
         s.dots.forEach(({ el: dot, t }) => {
@@ -238,6 +245,8 @@ export function ThreadStory({ children }: { children: ReactNode }) {
         const gptBottom = at("gpt", "bottom");
         const split = at("split", "top");
         const merge = at("merge", "top");
+        const answerBottom = at("merge", "bottom");
+        const report = at("report", "top");
 
         // Drop down the right-hand margin, clear of the copy, and only turn in
         // towards the card in the gap just above it. Then run behind the card to its base.
@@ -255,6 +264,12 @@ export function ThreadStory({ children }: { children: ReactNode }) {
           pick<SVGPathElement>(`[data-path="branch-${i}"]`)?.setAttribute("d", `M ${split.x} ${split.y} ${curve(split, top)}`);
           pick<SVGPathElement>(`[data-path="merge-${i}"]`)?.setAttribute("d", `M ${bottom.x} ${bottom.y} ${curve(bottom, merge)}`);
         });
+
+        // From the answer card on to the five-engine table, so the thread never stops.
+        pick<SVGPathElement>('[data-path="out"]')?.setAttribute(
+          "d",
+          `M ${answerBottom.x} ${answerBottom.y} ${curve(answerBottom, report)}`,
+        );
 
         while (dotLayer.firstChild) dotLayer.removeChild(dotLayer.firstChild);
         segs.forEach((s) => {
@@ -294,8 +309,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
       build();
       ScrollTrigger.addEventListener("refreshInit", build);
 
-      const trigger = (s: Seg, self: ScrollTrigger) => {
-        s.p = self.progress;
+      const step = (s: Seg) => {
         apply(s);
         if (s.kind === "tip") {
           if (s.p >= 0.98 && !s.reached) {
@@ -308,46 +322,40 @@ export function ThreadStory({ children }: { children: ReactNode }) {
         }
       };
 
+      // Each stretch of the thread follows the scroll through a smoothed scrub (a short, soft
+      // lag), so the line and the fish glide instead of tracking every wheel notch.
+      const track = (s: Seg, from: HTMLElement, start: string, end: string, to?: HTMLElement) => {
+        const proxy = { p: 0 };
+        gsap.to(proxy, {
+          p: 1,
+          ease: "none",
+          onUpdate: () => {
+            s.p = proxy.p;
+            step(s);
+          },
+          scrollTrigger: { trigger: from, endTrigger: to, start, end, scrub: 0.9 },
+        });
+      };
+
       const gpt = section("gpt");
       const sources = section("sources");
       const answer = section("answer");
 
+      const report = section("report");
+
       const lead = segs.find((x) => x.kind === "lead");
-      if (lead && gpt && sources)
-        ScrollTrigger.create({
-          trigger: gpt,
-          start: "top 85%",
-          endTrigger: sources,
-          end: "top 45%",
-          scrub: true,
-          onUpdate: (self) => trigger(lead, self),
-        });
+      if (lead && gpt && sources) track(lead, gpt, "top 85%", "top 45%", sources);
 
       if (sources)
         segs
           .filter((x) => x.kind === "tip")
-          .forEach((s, i) => {
-            ScrollTrigger.create({
-              trigger: sources,
-              start: `top ${58 - i * 2}%`,
-              end: `top ${12 - i * 2}%`,
-              scrub: true,
-              onUpdate: (self) => trigger(s, self),
-            });
-          });
+          .forEach((s, i) => track(s, sources, `top ${58 - i * 2}%`, `top ${12 - i * 2}%`));
 
       if (answer)
-        segs
-          .filter((x) => x.kind === "merge")
-          .forEach((s) => {
-            ScrollTrigger.create({
-              trigger: answer,
-              start: "top 92%",
-              end: "top 42%",
-              scrub: true,
-              onUpdate: (self) => trigger(s, self),
-            });
-          });
+        segs.filter((x) => x.kind === "merge").forEach((s) => track(s, answer, "top 92%", "top 42%"));
+
+      const out = segs.find((x) => x.kind === "out");
+      if (out && report) track(out, report, "top 96%", "top 46%");
 
       // ---- the living part: drift, turning, tail beat and light pulses ----
       let velocity = 0;
@@ -378,7 +386,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
         const speed = Math.min(2.4, velocity / 700);
 
         segs.forEach((s) => {
-          if (s.visible) {
+          if (s.alpha > 0.01) {
             s.smooth += shortest(s.smooth, s.angle) * 0.16;
             const swim = s.kind === "lead" ? 4.5 : 2.2;
             const off = Math.sin(time * 1.9 + s.phase) * swim;
@@ -391,7 +399,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
               scaleX: s.face,
               xPercent: -50,
               yPercent: -50,
-              opacity: 1,
+              opacity: s.alpha,
             });
             if (s.tail)
               gsap.set(s.tail, { rotation: Math.sin(s.tailPhase) * (9 + speed * 5), svgOrigin: "68 30" });
@@ -436,7 +444,7 @@ export function ThreadStory({ children }: { children: ReactNode }) {
           preserveAspectRatio="none"
           focusable="false"
         >
-          {["main", ...FOUR.map((i) => `branch-${i}`), ...FOUR.map((i) => `merge-${i}`)].map((id) => (
+          {["main", ...FOUR.map((i) => `branch-${i}`), ...FOUR.map((i) => `merge-${i}`), "out"].map((id) => (
             <path
               key={id}
               data-path={id}
@@ -461,6 +469,9 @@ export function ThreadStory({ children }: { children: ReactNode }) {
             <MedakaMark className="h-3.5 w-6" />
           </div>
         ))}
+        <div data-fish="out" className="will-move absolute left-0 top-0 opacity-0">
+          <MedakaMark className="h-3.5 w-6" />
+        </div>
       </div>
       <div className="relative z-10">{children}</div>
     </div>

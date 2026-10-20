@@ -428,10 +428,6 @@ body::after {
 
 .split-word {
   display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14em;
 }
 
 .split-inner {
@@ -440,7 +436,7 @@ body::after {
 
 @keyframes split-rise {
   from {
-    transform: translateY(108%);
+    transform: translateY(10px);
     opacity: 0;
   }
   to {
@@ -451,8 +447,8 @@ body::after {
 
 /* Used where the text is on screen at load. Pure CSS, so it needs no script. */
 .split-css .split-inner {
-  animation: split-rise 0.8s cubic-bezier(0.2, 0.7, 0.1, 1) both;
-  animation-delay: calc(var(--i, 0) * 18ms + 80ms);
+  animation: split-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: 60ms;
 }
 
 .stream-caret {

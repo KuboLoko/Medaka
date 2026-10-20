@@ -91,7 +91,7 @@ export function AnswerSection() {
         </Container>
       </section>
 
-      <section aria-labelledby="report-title" className="pb-20 sm:pb-28">
+      <section data-section="report" aria-labelledby="report-title" className="pb-20 sm:pb-28">
         <Container>
           <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
             <div data-reveal className="min-w-0">
@@ -119,7 +119,7 @@ export function AnswerSection() {
               </dl>
             </div>
 
-            <div data-reveal className="min-w-0">
+            <div data-reveal data-anchor="report" className="min-w-0">
               <MockFrame
                 title="yourfirm.co.uk · Free check"
                 label="Example. Named means your name appears in the answer. Cited means your website is one of its sources."

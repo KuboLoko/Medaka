@@ -31,7 +31,7 @@ export function CheckSection() {
         {
           clipPath: "ellipse(150% 118% at 50% 100%)",
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 100%", end: "top 12%", scrub: true },
+          scrollTrigger: { trigger: el, start: "top 100%", end: "top 12%", scrub: 0.8 },
         },
       );
       gsap.fromTo(
@@ -41,7 +41,7 @@ export function CheckSection() {
           opacity: 0,
           scaleY: 1,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 100%", end: "top 12%", scrub: true },
+          scrollTrigger: { trigger: el, start: "top 100%", end: "top 12%", scrub: 0.8 },
         },
       );
       gsap.fromTo(
@@ -51,7 +51,7 @@ export function CheckSection() {
           opacity: 1,
           y: 0,
           ease: "none",
-          scrollTrigger: { trigger: el, start: "top 62%", end: "top 24%", scrub: true },
+          scrollTrigger: { trigger: el, start: "top 62%", end: "top 24%", scrub: 0.8 },
         },
       );
     });

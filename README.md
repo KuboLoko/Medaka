@@ -69,9 +69,9 @@ Background: two fixed layers of faint slate wave lines (vector tiles, sharp at a
 
 Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/layout/Interactions.tsx`):
 
-- Floating reveal (`[data-reveal]`, `src/lib/reveals.ts`): blocks rise through a short drift, sway from side to side with a swing that dies away, and settle exactly in place. The motion is tied to the scroll with a little lag and plays once. A layout-level `Reveals` runs it on every page, again on each navigation.
-- `SplitHeading`: words or characters wrapped for a staggered rise. The hero plays as pure CSS at load. Section titles are revealed by GSAP on scroll. The heading keeps an `aria-label` and the spans are `aria-hidden`.
-- `ThreadStory`: the medaka turns with the curve, drifts, and beats its tail faster when you scroll faster. Dots along the thread light up as it passes. Once a branch arrives, light pulses run along it, a ripple leaves the card and its status badge pops in. Hovering a card repeats the ripple.
+- Reveals (`[data-reveal]`, `src/lib/reveals.ts`): text and blocks fade in and settle 10px with a gentle ease-out, once. There is no sideways sway, no bounce and no lag behind the scroll (client feedback, 2026-10-20). A layout-level `Reveals` runs it on every page and again on each navigation.
+- `SplitHeading`: a heading whose words are wrapped so it can be revealed as one block. It fades and settles 10px like any other text (the hero does this in pure CSS at load). The heading keeps an `aria-label` and the split spans are `aria-hidden`.
+- `ThreadStory`: one continuous thread runs from the hero to the ChatGPT card, splits into four branches, merges into the answer and carries on to the five-engine table. Each stretch follows the scroll through a smoothed scrub (`scrub: 0.9`) so the line and the fish glide. The fish fades at the ends of its path to hand over to the next one without a jump, turns with the curve, drifts a little and beats its tail faster when you scroll faster. Dots light up as it passes. When a branch arrives, light pulses run along it, a ripple leaves the card and its status badge pops in. The pinned loop and the closing curtain use the same soft scrub (`0.8`).
 - `ChatStream`: the prompt types, the search chips appear and the answer streams in word by word, scrubbed by scroll.
 - Engine table: row highlight and a glow on the engine mark on hover, and counters that tick up (`data-tick`).
 - `CheckSection`: a curved charcoal mask (an ellipse clip-path) rises over the light page and carries the closing call to action.

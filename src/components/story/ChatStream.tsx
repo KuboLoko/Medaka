@@ -35,7 +35,7 @@ export function ChatStream() {
     mm.add(MOTION_ANY, () => {
       const tl = gsap.timeline({
         defaults: { ease: "none" },
-        scrollTrigger: { trigger: el, start: "top 88%", end: "top 28%", scrub: true },
+        scrollTrigger: { trigger: el, start: "top 88%", end: "top 28%", scrub: 0.8 },
       });
       tl.from(".pchar", { opacity: 0, duration: 0.05, stagger: 0.05 })
         .from("[data-searching]", { opacity: 0, y: 6, duration: 0.4 })
