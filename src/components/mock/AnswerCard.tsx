@@ -9,7 +9,7 @@ type Source = {
 };
 
 /**
- * An illustrative AI answer with numbered source references.
+ * An illustrative AI answer with numbered source references, laid out with room to breathe.
  * Always rendered inside a MockFrame so the "illustrative" label is present.
  */
 export function AnswerCard({
@@ -28,46 +28,41 @@ export function AnswerCard({
   className?: string;
 }) {
   return (
-    <div className={cn("space-y-4", className)}>
-      <div className="rounded-lg border border-line bg-paper px-3.5 py-3">
-        <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink-500">
-          Buyer question
-        </p>
-        <p className="mt-1 text-sm font-medium text-ink-950">{question}</p>
+    <div className={cn("space-y-6", className)}>
+      <div>
+        <p className="text-xs font-medium text-ink-500">Buyer question</p>
+        <p className="mt-2 text-base font-medium leading-snug text-ink-950">“{question}”</p>
       </div>
 
-      <div className="rounded-lg border border-line bg-white px-3.5 py-3.5">
-        <p className="mb-2 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-500">
-          <Sparkles aria-hidden className="h-3 w-3" />
+      <div className="rounded-xl border border-line bg-white/70 p-5 sm:p-6">
+        <p className="flex items-center gap-1.5 text-xs font-medium text-ink-600">
+          <Sparkles aria-hidden className="h-3.5 w-3.5 text-copper-600" />
           {engine} answer
         </p>
-        <p className="text-sm leading-relaxed text-ink-800">{intro}</p>
-        <ul className="mt-3 space-y-2">
-          {shortlist.map((item) => (
+        <p className="mt-3 text-sm leading-relaxed text-ink-800">{intro}</p>
+        <ol className="mt-5 space-y-2.5">
+          {shortlist.map((item, i) => (
             <li
               key={item.name}
               className={cn(
-                "rounded-md border px-3 py-2 text-sm",
-                item.you
-                  ? "border-copper-500/50 bg-copper-100/60"
-                  : "border-line bg-paper-soft",
+                "flex items-start gap-3.5 rounded-lg border px-4 py-3 text-sm",
+                item.you ? "border-flame/40 bg-copper-100/60" : "border-transparent bg-sand/60",
               )}
             >
-              <span className="font-medium text-ink-950">{item.name}</span>{" "}
-              <span className="font-mono text-[10px] text-ink-600">
-                [{item.ref}]
+              <span className="mt-0.5 font-mono text-xs text-ink-500">{i + 1}</span>
+              <span className="min-w-0">
+                <span className="font-medium text-ink-950">{item.name}</span>{" "}
+                <sup className="font-mono text-[10px] text-ink-600">[{item.ref}]</sup>
+                <span className="mt-0.5 block text-xs leading-relaxed text-ink-600">{item.note}</span>
               </span>
-              <span className="block text-xs text-ink-600">{item.note}</span>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
 
       <div>
-        <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-500">
-          Sources cited
-        </p>
-        <div className="flex flex-wrap gap-1.5">
+        <p className="text-xs font-medium text-ink-500">Sources cited</p>
+        <div className="mt-2.5 flex flex-wrap gap-2">
           {sources.map((s, i) => (
             <SourceChip
               key={s.label}

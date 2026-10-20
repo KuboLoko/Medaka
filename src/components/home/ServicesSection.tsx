@@ -41,7 +41,7 @@ export function GlassIcon({ icon: Icon }: { icon: typeof Search }) {
   return (
     <span
       aria-hidden
-      className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 shadow-[inset_0_1px_0_rgb(255_255_255/0.25),0_10px_22px_-10px_rgb(240_106_37/0.6)] backdrop-blur-md"
+      className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-white/70 backdrop-blur-sm"
     >
       <Icon className="h-5 w-5 text-copper-600" />
     </span>

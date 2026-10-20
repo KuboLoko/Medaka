@@ -105,6 +105,7 @@ export function LoopSection() {
       const stage = el.querySelector<HTMLElement>(".loop-stage");
       const items = Array.from(el.querySelectorAll<HTMLElement>(".loop-item"));
       const labels = Array.from(el.querySelectorAll<HTMLElement>("[data-loop-label]"));
+      const dots = Array.from(el.querySelectorAll<HTMLElement>("[data-loop-dot]"));
       const fill = el.querySelector<HTMLElement>("[data-loop-fill]");
       const marker = el.querySelector<HTMLElement>("[data-loop-marker]");
       if (!stage || !fill || !marker) return;
@@ -115,6 +116,7 @@ export function LoopSection() {
         if (i === active) return;
         active = i;
         items.forEach((n, idx) => n.classList.toggle("is-active", idx === i));
+        dots.forEach((n, idx) => n.toggleAttribute("data-active", idx <= i));
         labels.forEach((n, idx) => {
           n.toggleAttribute("data-active", idx <= i);
           if (idx === i) n.setAttribute("aria-current", "step");
@@ -189,29 +191,40 @@ export function LoopSection() {
           </ol>
 
           <div className="loop-bar mt-14" aria-label="Loop progress">
-            <div className="relative h-px bg-line">
+            <div className="relative h-10">
+              <div className="absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-ink-900/10" />
               <div
                 data-loop-fill
-                className="absolute inset-y-0 left-0 w-full origin-left bg-flame"
+                className="absolute inset-x-0 top-1/2 h-[3px] origin-left -translate-y-1/2 rounded-full bg-flame"
                 style={{ transform: "scaleX(0)" }}
               />
+              {stages.map((s, i) => (
+                <span
+                  key={s.key}
+                  aria-hidden
+                  data-loop-dot
+                  className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-ink-300 bg-paper-soft transition-colors duration-300 [&[data-active]]:border-flame [&[data-active]]:bg-flame"
+                  style={{ left: `${(i / (stages.length - 1)) * 100}%` }}
+                />
+              ))}
               <div
                 data-loop-marker
                 className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: "0%" }}
               >
                 {/* The fish is drawn facing left. The bar runs left to right, so mirror it. */}
-                <MedakaMark animated className="h-4 w-7 -scale-x-100" />
+                <MedakaMark animated className="h-7 w-12 -scale-x-100" />
               </div>
             </div>
-            <ol className="mt-4 flex justify-between text-sm text-ink-500">
-              {stages.map((s) => (
+            <ol className="mt-3 flex justify-between">
+              {stages.map((s, i) => (
                 <li
                   key={s.key}
                   data-loop-label
-                  className="[&[data-active]]:font-medium [&[data-active]]:text-ink-900"
+                  className="flex items-baseline gap-2 text-sm text-ink-500 transition-colors duration-300 [&[data-active]]:text-ink-950"
                 >
-                  {s.key}
+                  <span className="font-mono text-[11px]">0{i + 1}</span>
+                  <span className="font-medium">{s.key}</span>
                 </li>
               ))}
             </ol>

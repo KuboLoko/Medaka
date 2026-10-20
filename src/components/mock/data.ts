@@ -1,6 +1,8 @@
 /**
  * All sample content for illustrative interfaces lives here.
- * Nothing in this file is real. Firms are generic placeholders, never real names.
+ * Nothing in this file is real. Firms are generic placeholders, never real names, and every
+ * number is internally consistent so that two dashboards never contradict each other:
+ * 24 buyer questions x 5 engines = 120 tracked answers, of which 30 name the firm (25%).
  */
 
 export const sampleQuestion = "Which firms specialise in [your service area]?";
@@ -29,17 +31,29 @@ export const sampleAnswer = {
   ],
 };
 
-export const engines = [
-  { name: "ChatGPT", status: "Mentioned", level: 3 },
-  { name: "Claude", status: "Mentioned", level: 2 },
-  { name: "Gemini", status: "Not mentioned", level: 0 },
-  { name: "Perplexity", status: "Mentioned", level: 1 },
-  { name: "Google AI Overviews", status: "Not mentioned", level: 0 },
+/** Answers naming the firm, by engine, out of 24 tracked questions each. */
+export const engineStats = [
+  { name: "ChatGPT", mark: "CG", named: 14, total: 24 },
+  { name: "Claude", mark: "CL", named: 9, total: 24 },
+  { name: "Gemini", mark: "GM", named: 0, total: 24 },
+  { name: "Perplexity", mark: "PX", named: 7, total: 24 },
+  { name: "Google AI Overviews", mark: "AO", named: 0, total: 24 },
 ];
 
-export const monthly = {
-  values: [2, 2, 3, 3, 4, 5],
+/** Share of tracked answers that name the firm, by month. The last value is 30 of 120. */
+export const trend = {
+  values: [8, 10, 13, 15, 19, 25],
   labels: ["M1", "M2", "M3", "M4", "M5", "M6"],
+  unit: "%",
+};
+
+export const kpis = {
+  answersNamed: { value: "30", suffix: "of 120", note: "+7 vs last month" },
+  share: { value: "25%", note: "+6 pts vs last month" },
+  engines: { value: "3", suffix: "of 5", note: "+1 engine" },
+  questions: { value: "24", note: "tracked each month" },
+  changed: { value: "7", note: "answers changed" },
+  sources: { value: "38", note: "4 new this month" },
 };
 
 export const changes = [
@@ -74,6 +88,13 @@ export const pages = [
     keywords: ["[need] options", "[need] guide"],
     fix: "Keep as is. Add a short comparison table to cover a related question.",
   },
+];
+
+export const sourceStats = [
+  { label: "Your site, about page", kind: "site" as const, n: 14, you: true },
+  { label: "Industry comparison article", kind: "article" as const, n: 11 },
+  { label: "Firm A, services page", kind: "page" as const, n: 9 },
+  { label: "Sector directory listing", kind: "directory" as const, n: 4 },
 ];
 
 export const facts = [

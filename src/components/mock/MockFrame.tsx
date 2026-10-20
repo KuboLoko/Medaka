@@ -1,10 +1,11 @@
+import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { ILLUSTRATIVE } from "@/lib/site";
 
 /**
- * Wrapper for every illustrative interface.
- * Always carries the "illustrative" label so no mock can be mistaken for real data.
+ * Wrapper for every illustrative interface: a flat, bordered panel with a quiet header.
+ * It always carries the "illustrative" label so no mock can be mistaken for real data.
  */
 export function MockFrame({
   title,
@@ -20,59 +21,92 @@ export function MockFrame({
   children: ReactNode;
 }) {
   return (
-    <figure
-      className={cn(
-        "light surface-light overflow-hidden text-ink-900",
-        className,
-      )}
-    >
-      <div className="flex items-center gap-3 border-b border-line bg-sand/70 px-4 py-2.5">
-        <span aria-hidden className="flex gap-1.5">
-          <i className="h-2 w-2 rounded-full bg-ink-300/70" />
-          <i className="h-2 w-2 rounded-full bg-ink-300/70" />
-          <i className="h-2 w-2 rounded-full bg-ink-300/70" />
+    <figure className={cn("light surface-light overflow-hidden text-ink-900", className)}>
+      <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5 sm:px-6">
+        <span className="flex min-w-0 items-center gap-2.5 text-sm font-medium text-ink-800">
+          <span aria-hidden className="h-2 w-2 shrink-0 rounded-full bg-flame" />
+          <span className="truncate">{title}</span>
         </span>
-        <span className="truncate font-mono text-[11px] uppercase tracking-[0.12em] text-ink-600">
-          {title}
+        <span className="shrink-0 rounded-full border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-ink-500">
+          Example
         </span>
       </div>
-      <div className={cn("p-4 sm:p-5", bodyClassName)}>{children}</div>
-      <figcaption className="border-t border-line bg-sand/50 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-600">
+      <div className={cn("p-5 sm:p-6", bodyClassName)}>{children}</div>
+      <figcaption className="border-t border-line px-5 py-3 font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-500 sm:px-6">
         {label}
       </figcaption>
     </figure>
   );
 }
 
+type Tone = "neutral" | "good" | "watch";
+
+/** A small change indicator: a pill, with an arrow when the change is good. */
+export function Delta({ children, tone = "neutral" }: { children: ReactNode; tone?: Tone }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium leading-snug",
+        tone === "good" && "bg-water-100 text-water-700",
+        tone === "watch" && "bg-copper-100 text-copper-700",
+        tone === "neutral" && "bg-sand text-ink-700",
+      )}
+    >
+      {tone === "good" && <ArrowUpRight aria-hidden className="h-3 w-3" />}
+      {children}
+    </span>
+  );
+}
+
+/** A clean metric: label, a large number, and an optional change pill. No box. */
 export function StatTile({
   label,
   value,
+  suffix,
   note,
   tone = "neutral",
 }: {
   label: string;
   value: string;
+  suffix?: string;
   note?: string;
-  tone?: "neutral" | "good" | "watch";
+  tone?: Tone;
 }) {
   return (
-    <div className="rounded-lg border border-line bg-paper p-3.5">
-      <p className="text-xs text-ink-600">{label}</p>
-      <p className="font-display mt-1 text-3xl leading-none text-ink-950">
+    <div className="min-w-0">
+      <p className="text-sm text-ink-600">{label}</p>
+      <p className="font-display mt-2 flex items-baseline gap-1.5 text-[2.5rem] leading-none text-ink-950">
         {value}
+        {suffix && <span className="font-sans text-sm text-ink-500">{suffix}</span>}
       </p>
       {note && (
-        <p
-          className={cn(
-            "mt-2 text-xs font-medium",
-            tone === "good" && "text-water-700",
-            tone === "watch" && "text-copper-700",
-            tone === "neutral" && "text-ink-600",
-          )}
-        >
-          {note}
+        <p className="mt-3">
+          <Delta tone={tone}>{note}</Delta>
         </p>
       )}
     </div>
+  );
+}
+
+/** A flat panel for a chart or list inside a dashboard. */
+export function Panel({
+  title,
+  sub,
+  className,
+  children,
+}: {
+  title: string;
+  sub?: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <section className={cn("min-w-0 rounded-xl border border-line bg-white/60 p-5 sm:p-6", className)}>
+      <header className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h4 className="text-sm font-medium text-ink-950">{title}</h4>
+        {sub && <p className="text-xs text-ink-500">{sub}</p>}
+      </header>
+      {children}
+    </section>
   );
 }

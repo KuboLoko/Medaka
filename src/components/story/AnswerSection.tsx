@@ -147,7 +147,7 @@ export function AnswerSection() {
                             <span className="flex items-center gap-2">
                               <span
                                 aria-hidden
-                                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-night font-mono text-[9px] text-cream transition-shadow duration-300 group-hover:shadow-[0_0_0_2px_rgb(240_106_37/0.55),0_0_16px_rgb(240_106_37/0.7)]"
+                                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-night font-mono text-[9px] text-cream transition-colors duration-300 group-hover:bg-flame group-hover:text-night"
                               >
                                 {r.mark}
                               </span>

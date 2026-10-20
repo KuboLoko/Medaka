@@ -1,63 +1,57 @@
 import { AnswerCard } from "./AnswerCard";
-import { MockFrame, StatTile } from "./MockFrame";
+import { EngineBars } from "./EngineBars";
+import { MockFrame, Panel, StatTile } from "./MockFrame";
 import { TrendChart } from "./TrendChart";
-import { engines, monthly, sampleAnswer, sampleQuestion } from "./data";
+import { kpis, sampleAnswer, sampleQuestion, trend } from "./data";
 
-/** The hero product visual: one AI answer, source references, visibility status and monthly change. */
+/** A dashboard preview: key numbers, one captured answer, engine by engine, and the trend. */
 export function HeroPreview() {
   return (
     <MockFrame
-      title="Medaka · Answer capture"
+      title="Medaka · Free check for yourfirm.co.uk"
       label="Example interface. Illustrative data."
-      bodyClassName="grid gap-5 md:grid-cols-5"
+      bodyClassName="space-y-8 p-6 sm:p-8"
     >
-      <div className="md:col-span-3">
-        <AnswerCard
-          question={sampleQuestion}
-          intro={sampleAnswer.intro}
-          shortlist={sampleAnswer.shortlist}
-          sources={sampleAnswer.sources}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+        <StatTile
+          label="Answers naming the firm"
+          value={kpis.answersNamed.value}
+          suffix={kpis.answersNamed.suffix}
+          note={kpis.answersNamed.note}
+          tone="good"
+        />
+        <StatTile label="Share of answers" value={kpis.share.value} note={kpis.share.note} tone="good" />
+        <StatTile
+          label="Engines naming the firm"
+          value={kpis.engines.value}
+          suffix={kpis.engines.suffix}
+          note={kpis.engines.note}
+          tone="good"
         />
       </div>
 
-      <div className="space-y-3 md:col-span-2">
-        <StatTile
-          label="Visibility status"
-          value="3 of 5"
-          note="engines mention the firm"
-        />
-        <StatTile
-          label="Change since last month"
-          value="+1"
-          note="engine now mentions the firm"
-          tone="good"
-        />
-        <div className="rounded-lg border border-line bg-paper p-3.5">
-          <p className="text-xs text-ink-600">Engines mentioning the firm, by month</p>
-          <TrendChart
-            values={monthly.values}
-            labels={monthly.labels}
-            ariaLabel="Illustrative line chart: number of buyer-question answers mentioning the firm rises over six months."
-            className="mt-2"
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+        <Panel title="One captured answer" sub="Buyer question to answer">
+          <AnswerCard
+            question={sampleQuestion}
+            intro={sampleAnswer.intro}
+            shortlist={sampleAnswer.shortlist}
+            sources={sampleAnswer.sources}
           />
+        </Panel>
+        <div className="min-w-0 space-y-6">
+          <Panel title="By engine" sub="24 buyer questions each">
+            <EngineBars />
+          </Panel>
+          <Panel title="Answers naming the firm" sub="Share of tracked answers, by month">
+            <TrendChart
+              values={trend.values}
+              labels={trend.labels}
+              unit={trend.unit}
+              ariaLabel="Illustrative line chart: the share of tracked answers that name the firm rises from 8 per cent to 25 per cent over six months."
+            />
+          </Panel>
         </div>
-        <ul className="space-y-1.5 text-xs text-ink-700" aria-label="Engines">
-          {engines.map((e) => (
-            <li
-              key={e.name}
-              className="flex items-center justify-between rounded border border-line bg-white px-2.5 py-1.5"
-            >
-              <span>{e.name}</span>
-              <span
-                className={
-                  e.level > 0 ? "font-medium text-water-700" : "text-ink-500"
-                }
-              >
-                {e.status}
-              </span>
-            </li>
-          ))}
-        </ul>
       </div>
     </MockFrame>
   );

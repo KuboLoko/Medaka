@@ -63,9 +63,11 @@ Motion is restrained: scroll reveals (Framer Motion) and a small CSS tail sway o
 
 ## Depth and motion
 
-Atmosphere: a very light tiled SVG film grain on one fixed layer (`body::after`, no blend mode), soft orange `.glow` blooms behind the answer box and the ChatGPT card, and layered soft card shadows (`--shadow-card`). `.surface-light` and `.surface-glass` are frosted glass (translucent white, `backdrop-filter`) and switch to a dark glass inside `.slate`. Cards with `data-spotlight` light up their own edge in orange where the cursor is, with a faint glow inside.
+Atmosphere: a very light tiled SVG film grain on one fixed layer (`body::after`, no blend mode), soft orange `.glow` blooms behind the answer box and the ChatGPT card, and no drop shadows on cards anywhere (client feedback, 2026-10-20). `.surface-light` and `.surface-glass` are flat cards with a hairline border, a light translucent fill and a faint blur, and they switch to a dark fill inside `.slate`. Cards with `data-spotlight` light up their own edge in orange where the cursor is, with a faint glow inside.
 
 Background: two fixed layers of faint slate wave lines (vector tiles, sharp at any pixel density) slide sideways in opposite directions at about 24 and 16 px a second (60 s and 90 s per tile, `.waves` in `globals.css`). Only `transform` is animated and each tile loops seamlessly. The soft warm-grey band (`tone-raise`) is translucent so the waves and the light patches show through. With reduced motion the waves stay still.
+
+Dashboards (`src/components/mock/`): flat bordered panels with generous spacing, large numerals with change pills (`StatTile`, `Delta`), a minimalist line chart with hairline gridlines, a monotone smooth curve, crisp data points and a labelled final value (`TrendChart`), and per-engine bars with status badges (`EngineBars`). All sample numbers live in `data.ts` and agree with each other: 24 questions x 5 engines = 120 tracked answers, 30 of which name the firm (25%). Every frame carries "Example. Illustrative data.". The loop's progress line (Find, Measure, Fix, Prove) is a 3px track with stage nodes and a larger swimming medaka.
 
 Choreography (`src/components/story/`, `src/lib/reveals.ts`, `src/components/layout/Interactions.tsx`):
 
