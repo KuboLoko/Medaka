@@ -81,7 +81,12 @@ export function TrendChart({
   const lastLabel = `${values[values.length - 1]}${unit}`;
 
   return (
-    <div className="-mx-1 overflow-x-auto px-1">
+    <div
+      role="region"
+      aria-label={`${ariaLabel} Scrollable.`}
+      tabIndex={0}
+      className="-mx-1 overflow-x-auto px-1"
+    >
     <svg
       viewBox={`0 0 ${W} ${H}`}
       role="img"
@@ -163,6 +168,26 @@ export function TrendChart({
         </text>
       ))}
     </svg>
+    <table className="sr-only">
+      <caption>{ariaLabel}</caption>
+      <thead>
+        <tr>
+          <th scope="col">Month</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {labels.map((l, i) => (
+          <tr key={l}>
+            <th scope="row">{l}</th>
+            <td>
+              {values[i]}
+              {unit}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
     </div>
   );
 }

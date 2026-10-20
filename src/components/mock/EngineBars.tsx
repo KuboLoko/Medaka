@@ -24,7 +24,15 @@ export function EngineBars({ className }: { className?: string }) {
             <span className="truncate">{e.name}</span>
           </span>
           <span className="order-3 col-span-2 flex items-center gap-3 sm:order-2 sm:col-span-1">
-            <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-900/[0.07]">
+            <span
+              role="meter"
+              aria-label={`${e.name}: answers naming the firm`}
+              aria-valuemin={0}
+              aria-valuemax={e.total}
+              aria-valuenow={e.named}
+              aria-valuetext={`${e.named} of ${e.total}`}
+              className="h-1.5 flex-1 overflow-hidden rounded-full bg-ink-900/[0.07]"
+            >
               <span
                 className="block h-full rounded-full bg-flame"
                 style={{ width: `${(e.named / e.total) * 100}%` }}

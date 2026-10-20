@@ -125,7 +125,12 @@ export function AnswerSection() {
                 label="Example. Named means your name appears in the answer. Cited means your website is one of its sources."
                 bodyClassName="p-0 sm:p-0"
               >
-                <div className="overflow-x-auto">
+                <div
+                  role="region"
+                  aria-label="Example answers by engine and question. Scrollable."
+                  tabIndex={0}
+                  className="overflow-x-auto"
+                >
                   <table className="w-full min-w-[30rem] text-left text-sm">
                     <caption className="sr-only">
                       Example answers by engine and question. Illustrative data.

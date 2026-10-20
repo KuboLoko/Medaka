@@ -60,6 +60,9 @@ export function SeoComparison() {
 
         <div
           data-reveal
+          role="region"
+          aria-label="Comparison of search optimisation and AI visibility monitoring. Scrollable."
+          tabIndex={0}
           className="light surface-light mt-10 overflow-x-auto"
         >
           <table className="w-full min-w-[44rem] text-left text-sm">

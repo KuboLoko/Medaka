@@ -1,7 +1,4 @@
 import { Activity, Library, Lightbulb, MessagesSquare, PenLine, Search } from "lucide-react";
-import { ButtonLink } from "@/components/ui/Button";
-import { Section, SectionHeader } from "@/components/ui/Layout";
-import { Reveal } from "@/components/ui/Reveal";
 
 export const services = [
   {
@@ -59,28 +56,5 @@ export function ServiceGrid() {
         </li>
       ))}
     </ul>
-  );
-}
-
-export function ServicesSection() {
-  return (
-    <Section id="services" labelledBy="services-title">
-      <Reveal>
-        <SectionHeader
-          id="services-title"
-          eyebrow="Services"
-          title="SEOptimist is the expert partner behind Medaka."
-          intro="Medaka shows what the engines say. SEOptimist helps you act on it, with people who work on search and content every day."
-        />
-      </Reveal>
-      <Reveal delay={0.1} className="mt-12">
-        <ServiceGrid />
-        <div className="mt-8">
-          <ButtonLink href="/services" variant="secondary">
-            About our services
-          </ButtonLink>
-        </div>
-      </Reveal>
-    </Section>
   );
 }

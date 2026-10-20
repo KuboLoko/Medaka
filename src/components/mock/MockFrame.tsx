@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { ILLUSTRATIVE } from "@/lib/site";
 
@@ -20,12 +20,16 @@ export function MockFrame({
   bodyClassName?: string;
   children: ReactNode;
 }) {
+  const titleId = useId();
   return (
-    <figure className={cn("light surface-light overflow-hidden text-ink-900", className)}>
+    <figure
+      aria-labelledby={titleId}
+      className={cn("light surface-light overflow-hidden text-ink-900", className)}
+    >
       <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3.5 sm:px-6">
         <span className="flex min-w-0 items-center gap-2.5 text-sm font-medium text-ink-800">
           <span aria-hidden className="h-2 w-2 shrink-0 rounded-full bg-flame" />
-          <span className="truncate">{title}</span>
+          <span id={titleId} className="truncate">{title}</span>
         </span>
         <span className="shrink-0 rounded-full border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-ink-500">
           Example
@@ -58,7 +62,7 @@ export function Delta({ children, tone = "neutral" }: { children: ReactNode; ton
   );
 }
 
-/** A clean metric: label, a large number, and an optional change pill. No box. */
+/** A clean metric: label, a large number, and an optional change pill. Render inside a `dl`. */
 export function StatTile({
   label,
   value,
@@ -74,15 +78,15 @@ export function StatTile({
 }) {
   return (
     <div className="min-w-0">
-      <p className="text-sm text-ink-600">{label}</p>
-      <p className="font-display mt-2 flex items-baseline gap-1.5 text-[2.5rem] leading-none text-ink-950">
+      <dt className="text-sm text-ink-600">{label}</dt>
+      <dd className="font-display mt-2 flex items-baseline gap-1.5 text-[2.5rem] leading-none text-ink-950">
         {value}
         {suffix && <span className="font-sans text-sm text-ink-500">{suffix}</span>}
-      </p>
+      </dd>
       {note && (
-        <p className="mt-3">
+        <dd className="mt-3">
           <Delta tone={tone}>{note}</Delta>
-        </p>
+        </dd>
       )}
     </div>
   );
@@ -92,18 +96,20 @@ export function StatTile({
 export function Panel({
   title,
   sub,
+  as: Heading = "h3",
   className,
   children,
 }: {
   title: string;
   sub?: string;
+  as?: "h3" | "h4";
   className?: string;
   children: ReactNode;
 }) {
   return (
     <section className={cn("min-w-0 rounded-xl border border-line bg-white/60 p-5 sm:p-6", className)}>
       <header className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h4 className="text-sm font-medium text-ink-950">{title}</h4>
+        <Heading className="text-sm font-medium text-ink-950">{title}</Heading>
         {sub && <p className="text-xs text-ink-500">{sub}</p>}
       </header>
       {children}

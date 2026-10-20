@@ -15,7 +15,6 @@
   /* Constants, identical in every scope */
   --color-night: #121a24;
   --color-night-deep: #0c121a;
-  --color-night-raise: #1a2431;
   --color-cream: #f4f2eb;
   --color-cta: #c23f09;
   --color-cta-hover: #a83506;
@@ -42,7 +41,6 @@
   --color-copper-100: #ffe7d9;
 
   --color-water-700: #0f6b63;
-  --color-water-500: #1a9a8e;
   --color-water-100: #d8efec;
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -79,7 +77,6 @@
     --color-copper-100: #ffd3bf;
 
     --color-water-700: #7fd6c9;
-    --color-water-500: #3fbfaf;
     --color-water-100: #164a47;
 
     color-scheme: dark;
@@ -109,7 +106,6 @@
     --color-copper-100: #ffe7d9;
 
     --color-water-700: #0f6b63;
-    --color-water-500: #1a9a8e;
     --color-water-100: #d8efec;
 
     color-scheme: light;
@@ -169,7 +165,7 @@
   }
 }
 
-/* Medaka fish: tail sway and sight-line flow. Purely decorative. */
+/* Medaka fish: tail sway and loading pulse. Purely decorative. */
 @keyframes tail-sway {
   0%,
   100% {
@@ -177,22 +173,6 @@
   }
   50% {
     transform: rotate(8deg);
-  }
-}
-
-@keyframes drift {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes sight-flow {
-  to {
-    stroke-dashoffset: -24;
   }
 }
 
@@ -219,15 +199,6 @@
   animation: tail-sway 1s ease-in-out infinite;
 }
 
-.fish-drift {
-  animation: drift 6s ease-in-out infinite;
-}
-
-.sight-line {
-  stroke-dasharray: 4 8;
-  animation: sight-flow 2.4s linear infinite;
-}
-
 .pulse-dot {
   animation: soft-pulse 1.4s ease-in-out infinite;
 }
@@ -243,8 +214,6 @@
 @media (prefers-reduced-motion: reduce) {
   .fish-live .fish-tail,
   .fish-hover:hover .fish-tail,
-  .fish-drift,
-  .sight-line,
   .pulse-dot {
     animation: none;
   }
@@ -435,22 +404,6 @@ body::after {
   animation-delay: 60ms;
 }
 
-.stream-caret {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  margin-left: 2px;
-  vertical-align: -0.15em;
-  background: currentColor;
-  animation: caret-blink 1s steps(1) infinite;
-}
-
-@keyframes caret-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
 /* ---------- Motion helpers ---------- */
 
 .ripple-ring {
@@ -471,8 +424,7 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .split-css .split-inner,
-  .stream-caret {
+  .split-css .split-inner {
     animation: none;
   }
 

@@ -36,7 +36,7 @@ export default function ContactPage() {
             />
           </div>
 
-          <aside data-reveal aria-label="Who to contact" className="max-w-sm">
+          <div data-reveal role="group" aria-label="Who to contact" className="max-w-sm">
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-copper-600">
               Medaka by SEOptimist
             </p>
@@ -44,7 +44,7 @@ export default function ContactPage() {
               James Finlayson, AI visibility engineer.
             </p>
             <LegalNotice className="mt-8 text-sm leading-relaxed text-ink-600" />
-          </aside>
+          </div>
         </div>
       </Section>
     </>

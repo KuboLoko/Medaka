@@ -147,7 +147,7 @@ export function PlatformDashboard() {
 function Overview() {
   return (
     <div className="space-y-8">
-      <div className="grid grid-cols-2 gap-x-6 gap-y-7 lg:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-x-6 gap-y-7 lg:grid-cols-4">
         <StatTile
           label="Answers naming the firm"
           value={kpis.answersNamed.value}
@@ -164,9 +164,9 @@ function Overview() {
           tone="good"
         />
         <StatTile label="Questions tracked" value={kpis.questions.value} note={kpis.questions.note} />
-      </div>
+      </dl>
 
-      <Panel title="Answers naming the firm" sub="Share of tracked answers, by month">
+      <Panel as="h4" title="Answers naming the firm" sub="Share of tracked answers, by month">
         <TrendChart
           values={trend.values}
           labels={trend.labels}
@@ -175,7 +175,7 @@ function Overview() {
         />
       </Panel>
 
-      <Panel title="By engine" sub="24 buyer questions each">
+      <Panel as="h4" title="By engine" sub="24 buyer questions each">
         <EngineBars />
       </Panel>
     </div>
@@ -185,7 +185,7 @@ function Overview() {
 function Sources() {
   const max = Math.max(...sourceStats.map((s) => s.n));
   return (
-    <Panel title="Most cited sources" sub="Answers citing each source, out of 120">
+    <Panel as="h4" title="Most cited sources" sub="Answers citing each source, out of 120">
       <ul className="divide-y divide-line">
         {sourceStats.map((s) => (
           <li

@@ -13,12 +13,12 @@ const icon = {
 export function MonthlyReport() {
   return (
     <MockFrame title="Monthly report · Month 6" bodyClassName="space-y-8 p-6 sm:p-8">
-      <div className="grid grid-cols-2 gap-x-6 gap-y-7 lg:grid-cols-4">
+      <dl className="grid grid-cols-2 gap-x-6 gap-y-7 lg:grid-cols-4">
         <StatTile label="Buyer questions tracked" value={kpis.questions.value} note={kpis.questions.note} />
         <StatTile label="AI engines monitored" value="5" note="ChatGPT to AI Overviews" />
         <StatTile label="Answers that changed" value={kpis.changed.value} note="since last month" />
         <StatTile label="Sources cited" value={kpis.sources.value} note={kpis.sources.note} tone="good" />
-      </div>
+      </dl>
 
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-2">
         <Panel title="Answers naming the firm" sub="Share of tracked answers, by month">

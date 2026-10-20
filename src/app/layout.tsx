@@ -24,7 +24,10 @@ export const metadata: Metadata = {
   description: site.description,
   applicationName: "Medaka",
   authors: [{ name: "SEOptimist" }],
+  alternates: { canonical: "/" },
+  ...(site.indexable ? {} : { robots: { index: false, follow: false } }),
   openGraph: {
+    url: "/",
     type: "website",
     locale: "en_GB",
     siteName: "Medaka",
@@ -40,6 +43,28 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#f7f5f0",
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: "SEOptimist",
+      legalName: "Web Pebble Ltd",
+      url: site.url,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.name,
+      description: site.description,
+      url: site.url,
+      inLanguage: "en-GB",
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -58,10 +83,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <Header />
         <Interactions />
-        <main id="main" className="flex-1 overflow-x-clip">
+        <main id="main" tabIndex={-1} className="flex-1 overflow-x-clip outline-none">
           <Reveals>{children}</Reveals>
         </main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
       </body>
     </html>
   );

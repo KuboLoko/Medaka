@@ -12,7 +12,7 @@ export function HeroPreview() {
       label="Example interface. Illustrative data."
       bodyClassName="space-y-8 p-6 sm:p-8"
     >
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <dl className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         <StatTile
           label="Answers naming the firm"
           value={kpis.answersNamed.value}
@@ -28,7 +28,7 @@ export function HeroPreview() {
           note={kpis.engines.note}
           tone="good"
         />
-      </div>
+      </dl>
 
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         <Panel title="One captured answer" sub="Buyer question to answer">

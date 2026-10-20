@@ -1,11 +1,24 @@
 import type { Metadata } from "next";
 
+/** Explicit URL first, then the Vercel deployment host, then local development. */
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/$/, "");
+  const host =
+    process.env.VERCEL_ENV === "production"
+      ? (process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL)
+      : process.env.VERCEL_URL;
+  return host ? `https://${host}` : "http://localhost:3000";
+}
+
 export const site = {
   name: "Medaka",
   tagline: "AI visibility monitoring for UK finance firms",
   description:
-    "Medaka monitors how AI engines answer the questions your buyers ask, shows how your firm appears, and turns the findings into practical actions. Built by SEOptimist.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    "Medaka monitors how AI engines answer your buyers' questions, shows how your firm appears and turns the findings into actions. By SEOptimist.",
+  url: resolveSiteUrl(),
+  /** Preview deployments must not be indexed; everything else (production, local build) may be. */
+  indexable: !process.env.VERCEL_ENV || process.env.VERCEL_ENV === "production",
 } as const;
 
 /** Company wording, as published on the SEOptimist website. */
@@ -66,6 +79,9 @@ export const routes = [
   "/legal/terms",
 ] as const;
 
+/** Pages kept out of search results and the sitemap. */
+export const noindexRoutes: readonly string[] = ["/members", "/legal/privacy", "/legal/terms"];
+
 export const ILLUSTRATIVE = "Example. Illustrative data.";
 
 type PageMeta = {
@@ -81,12 +97,26 @@ export function pageMetadata({
   path,
   noindex,
 }: PageMeta): Metadata {
+  const shareTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
   return {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { title, description, url: path },
-    twitter: { title, description },
+    openGraph: {
+      type: "website",
+      locale: "en_GB",
+      siteName: site.name,
+      title: shareTitle,
+      description,
+      url: path,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: site.tagline }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: shareTitle,
+      description,
+      images: ["/opengraph-image"],
+    },
     ...(noindex ? { robots: { index: false, follow: true } } : {}),
   };
 }

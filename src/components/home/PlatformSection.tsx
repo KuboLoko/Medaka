@@ -1,7 +1,3 @@
-import { ButtonLink } from "@/components/ui/Button";
-import { Section, SectionHeader } from "@/components/ui/Layout";
-import { Reveal } from "@/components/ui/Reveal";
-import { PlatformDashboard } from "@/components/mock/PlatformDashboard";
 
 export const platformPoints = [
   {
@@ -32,31 +28,5 @@ export function PlatformPoints() {
         </div>
       ))}
     </dl>
-  );
-}
-
-export function PlatformSection() {
-  return (
-    <Section id="platform" tone="raise" labelledBy="platform-title">
-      <Reveal>
-        <SectionHeader
-          id="platform-title"
-          eyebrow="Platform"
-          title="One place for results, evidence and next steps."
-          intro="The members area holds the reports, the facts base and the page-by-page work. Select a section below to see an example."
-        />
-      </Reveal>
-      <Reveal delay={0.1} className="mt-12">
-        <PlatformDashboard />
-      </Reveal>
-      <Reveal className="mt-14">
-        <PlatformPoints />
-        <div className="mt-10">
-          <ButtonLink href="/platform" variant="secondary">
-            More about the platform
-          </ButtonLink>
-        </div>
-      </Reveal>
-    </Section>
   );
 }

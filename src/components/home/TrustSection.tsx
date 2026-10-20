@@ -1,6 +1,3 @@
-import { ButtonLink } from "@/components/ui/Button";
-import { Section, SectionHeader } from "@/components/ui/Layout";
-import { Reveal } from "@/components/ui/Reveal";
 
 /*
   Only the statements verified against the SEOptimist website belong here.
@@ -82,28 +79,5 @@ export function TrustGrid() {
         </div>
       ))}
     </dl>
-  );
-}
-
-export function TrustSection() {
-  return (
-    <Section id="trust" tone="deep" labelledBy="trust-title">
-      <Reveal>
-        <SectionHeader
-          id="trust-title"
-          eyebrow="Trust"
-          title="Plain about what the audit reads and shows."
-          intro="Finance firms need to know what is read, and how conclusions are reached. Here is what we can state."
-        />
-      </Reveal>
-      <Reveal delay={0.1} className="mt-12">
-        <TrustGrid />
-        <div className="mt-10">
-          <ButtonLink href="/trust" variant="secondary">
-            Read about trust
-          </ButtonLink>
-        </div>
-      </Reveal>
-    </Section>
   );
 }
