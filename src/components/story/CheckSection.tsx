@@ -75,26 +75,42 @@ export function CheckSection() {
       <div ref={content} className="slate relative w-full bg-transparent py-24 sm:py-32">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
+            <p className="mb-5 font-mono text-xs uppercase tracking-[0.14em] text-copper-600">
+              Ungated diagnostic
+            </p>
             <SplitHeading
               id="check-title"
-              text="Which answers name you?"
+              text="What does AI say about your firm today?"
               className="font-display text-balance text-4xl leading-[1.04] sm:text-6xl"
             />
             <p className="mx-auto mt-5 max-w-lg text-lg text-ink-600">
-              We read only your public pages. We keep your domain for your audit.
+              We will run your domain through ChatGPT, Claude, Gemini, Perplexity
+              and Google AI Overviews using real buyer prompts.
             </p>
-            <DomainCheck className="mx-auto mt-9 max-w-lg text-left" />
+            <p className="mx-auto mt-4 max-w-lg text-lg text-ink-600">
+              You will receive a confidential, verbatim report showing who was
+              recommended instead, which competitor pages were cited, and the
+              exact content gaps behind those answers.
+            </p>
+            <DomainCheck
+              stacked
+              placeholder="Enter corporate website domain"
+              buttonLabel="Generate confidential AI visibility audit"
+              className="mx-auto mt-9 max-w-lg text-left"
+            />
             <p className="mx-auto mt-4 max-w-lg text-sm text-ink-600">
               {publicPagesStatement}
             </p>
             <div className="mt-14 border-t border-line pt-8 text-sm text-ink-600">
               <p className="flex items-center justify-center gap-2.5">
                 <MedakaMark className="h-3.5 w-6" />
-                <span>
-                  medaka means “high eyes”. It sees what the engines see.
-                </span>
+                <span>Web Pebble Ltd (Company No. 07926157) • ICO Registration ZC233949</span>
               </p>
-              <p className="mt-3">James Finlayson, AI visibility engineer.</p>
+              <p className="mt-3">
+                Founder-led delivery by James Finlayson • 10 years building
+                multilingual content infrastructure
+              </p>
+              <p className="mt-3">We do not work with crypto, subprime, or unbacked fintech</p>
             </div>
           </div>
         </Container>

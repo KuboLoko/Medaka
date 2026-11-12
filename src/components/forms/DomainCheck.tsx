@@ -14,10 +14,14 @@ export const DOMAIN_KEY = "medaka:domain";
  */
 export function DomainCheck({
   buttonLabel = "Check your domain",
+  placeholder = "yourfirm.co.uk",
+  stacked = false,
   tone = "light",
   className,
 }: {
   buttonLabel?: string;
+  placeholder?: string;
+  stacked?: boolean;
   tone?: "light" | "dark";
   className?: string;
 }) {
@@ -46,14 +50,14 @@ export function DomainCheck({
       <label htmlFor={`${id}-domain`} className="sr-only">
         Company domain
       </label>
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className={cn("flex flex-col gap-2", !stacked && "sm:flex-row")}>
         <input
           id={`${id}-domain`}
           name="domain"
           type="text"
           inputMode="url"
           autoComplete="url"
-          placeholder="yourfirm.co.uk"
+          placeholder={placeholder}
           aria-invalid={!!error}
           aria-describedby={error ? `${id}-err` : undefined}
           className={cn(

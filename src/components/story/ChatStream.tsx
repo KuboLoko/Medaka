@@ -5,12 +5,12 @@ import { DomainCheck } from "@/components/forms/DomainCheck";
 import { MockFrame } from "@/components/mock/MockFrame";
 import { gsap, MOTION_ANY } from "@/lib/gsap";
 
-const PROMPT = "Which UK firms would you recommend for [your service]?";
+const PROMPT = "Who are the leading mid-tier insolvency practitioners in London?";
 
 const searches = [
-  "best UK firms for [your service]",
-  "[your service] firm reviews",
-  "recommended [your service] UK reddit",
+  "leading insolvency practitioners London",
+  "mid-tier insolvency practitioner reviews",
+  "recommended insolvency practitioner London reddit",
 ];
 
 const answer = [

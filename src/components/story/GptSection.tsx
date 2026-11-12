@@ -16,31 +16,28 @@ export function GptSection() {
             data-reveal
             className="inline-block rounded bg-night px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-cream"
           >
-            The buyer question
+            The challenger reframe
           </p>
           <SplitHeading
             id="gpt-title"
-            text="It starts with a question."
+            text="Good SEO is necessary. It is no longer sufficient."
             className="font-display text-balance mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]"
           />
           <div data-reveal className="mt-10 space-y-8">
-            <div>
-              <h3 className="text-lg font-medium text-ink-900">A buyer asks an AI engine.</h3>
-              <p className="text-pretty mt-2 text-ink-600">
-                A finance director types a question into an assistant such as
-                ChatGPT: Which UK firms would you recommend for [your service]?
-                This is the kind of question a buyer can now put to an assistant.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium text-ink-900">
-                The engine searches the live web.
-              </h3>
-              <p className="text-pretty mt-2 text-ink-600">
-                When web search is on, it runs real searches at the moment of
-                asking, the way a person would.
-              </p>
-            </div>
+            <p className="text-pretty text-ink-600">
+              Your firm spent years building organic search authority. But pages
+              that rank well in search can still receive no citations from AI
+              engines.
+            </p>
+            <p className="text-pretty text-ink-600">
+              Traditional search measures keyword position. Generative engines
+              weigh how well a page answers the question and whether other
+              sources back it up. One discipline, not two.
+            </p>
+            <p className="text-pretty text-lg font-medium text-ink-900">
+              Your SEO team is the right team. They are simply missing one
+              measurement, and it is not one you can buy off a dashboard.
+            </p>
           </div>
         </div>
 

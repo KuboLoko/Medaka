@@ -83,16 +83,24 @@ export function SourcesSection() {
     >
       <Container>
         <div data-reveal className="max-w-md">
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-copper-600">
+            Institutional exposure
+          </p>
           <SplitHeading
             id="sources-title"
-            text="It reads sources, not only your website."
+            text="In finance, visibility without accuracy is a regulatory liability."
             className="font-display text-balance text-3xl leading-[1.08] sm:text-4xl"
           />
           <p className="mt-4 text-ink-600">
-            Reddit threads, LinkedIn pages and the sites of your rivals are read
-            next to yours.
+            Being named is only useful if the answer is accurate. When an AI
+            engine recites an outdated fee schedule, an expired interest rate or
+            an incorrect regulatory status, it can create regulatory exposure.
           </p>
-          <p className="mt-4 font-medium text-ink-900">Each fish is one question.</p>
+          <p className="mt-4 font-medium text-ink-900">
+            Medaka treats reputation management and AI visibility as inseparable.
+            We monitor what AI says, diagnose what is missing or incorrect, and
+            fix the underlying sources.
+          </p>
         </div>
 
         <div className="relative h-0 lg:h-48">

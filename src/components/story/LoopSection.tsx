@@ -9,30 +9,9 @@ import { gsap, ScrollTrigger, MOTION_DESKTOP } from "@/lib/gsap";
 
 const stages = [
   {
-    key: "Find",
-    title: "First we find the questions.",
-    text: "Medaka reads your public pages, works out what you sell and who you compete with, and lists the questions your buyers ask.",
-    card: (
-      <MockFrame title="Questions to ask">
-        <ul className="space-y-1.5 text-sm text-ink-800">
-          {[
-            "Which UK firms would you recommend for [your service]?",
-            "Who are the best firms for [your service] for a growing business?",
-            "Which firm should a family office hire for [your service]?",
-            "What should I look for in a [your service] provider?",
-          ].map((q, i) => (
-            <li key={q} className={i === 3 ? "rounded bg-night px-3 py-2 text-cream" : "rounded bg-sand px-3 py-2"}>
-              {q}
-            </li>
-          ))}
-        </ul>
-      </MockFrame>
-    ),
-  },
-  {
-    key: "Measure",
-    title: "Then we measure the answers.",
-    text: "Each question goes to ChatGPT, Claude, Gemini, Perplexity and Google AI Overviews, live. We record who was named and which websites were cited.",
+    key: "Baseline",
+    title: "Capture the verbatim answers across all five engines.",
+    text: "",
     card: (
       <MockFrame title="Answers, this month">
         <ul className="space-y-1.5 text-sm">
@@ -53,9 +32,69 @@ const stages = [
     ),
   },
   {
-    key: "Fix",
-    title: "Then we show what to fix first.",
-    text: "Where your firm is missing, the report points to the pages and questions to work on first.",
+    key: "Allocate",
+    title: "Assign real buyer queries to your existing site URLs.",
+    text: "",
+    card: (
+      <MockFrame title="Queries and pages" label="Example. Illustrative data.">
+        <ul className="space-y-1.5 text-sm text-ink-800">
+          {[
+            ["Leading insolvency practitioners in London", "/services/insolvency"],
+            ["Who audits mid-size firms?", "/services/audit"],
+            ["Tax advisers for owner-managed firms", "/services/tax"],
+          ].map(([q, url]) => (
+            <li key={q} className="flex items-center justify-between gap-3 rounded bg-sand px-3 py-2">
+              <span>{q}</span>
+              <span className="font-mono text-[11px] text-ink-600">{url}</span>
+            </li>
+          ))}
+        </ul>
+      </MockFrame>
+    ),
+  },
+  {
+    key: "Enrich",
+    title: "Generate page-by-page implementation packets with approved claims.",
+    text: "",
+    card: (
+      <MockFrame title="Implementation packet" label="Example. Illustrative data.">
+        <ul className="space-y-1.5 text-sm text-ink-800">
+          {[
+            "Page: /services/insolvency",
+            "Buyer question to answer in the first paragraph",
+            "Approved claims to use, with their source",
+            "Structured data to add",
+          ].map((line) => (
+            <li key={line} className="rounded bg-sand px-3 py-2">
+              {line}
+            </li>
+          ))}
+        </ul>
+      </MockFrame>
+    ),
+  },
+  {
+    key: "Governance",
+    title: "Submit rendered before-and-after sheets for compliance sign-off.",
+    text: "",
+    card: (
+      <MockFrame title="Before and after" label="Example. Illustrative data.">
+        <div className="space-y-2 text-sm text-ink-800">
+          <p className="rounded bg-sand px-3 py-2">
+            <del className="text-ink-500">We are the leading firm in London.</del>
+          </p>
+          <p className="rounded bg-sand px-3 py-2">
+            <ins className="underline">We act for owner-managed firms across London.</ins>
+          </p>
+          <p className="pt-1 text-xs text-ink-600">Status: awaiting compliance approval</p>
+        </div>
+      </MockFrame>
+    ),
+  },
+  {
+    key: "Remediate",
+    title: "Update content and schema, as a turnkey service or through your own agency.",
+    text: "",
     card: (
       <MockFrame title="What to fix first">
         <ol className="list-decimal space-y-2 pl-5 text-sm text-ink-800 marker:text-ink-500">
@@ -68,8 +107,8 @@ const stages = [
   },
   {
     key: "Prove",
-    title: "Then we ask again.",
-    text: "Each month the same questions go back to the same engines, so you can see what changed.",
+    title: "Re-measure on the identical baseline instrument to verify the shift.",
+    text: "",
     card: (
       <MockFrame title="Month on month">
         <div className="grid grid-cols-2 gap-3 text-center">
@@ -166,8 +205,14 @@ export function LoopSection() {
     >
       <div className="loop-stage py-20 sm:py-28">
         <Container>
-          <h2 id="loop-title" className="sr-only">
-            The monthly loop: find, measure, fix, prove
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-copper-600">
+            The remediation moat
+          </p>
+          <h2
+            id="loop-title"
+            className="font-display text-balance mb-10 mt-3 max-w-2xl text-2xl leading-tight sm:text-3xl"
+          >
+            Don’t settle for a score. Fix the page and re-measure.
           </h2>
           <ol className="loop-list space-y-16 lg:space-y-0">
             {stages.map((s, i) => (
@@ -179,7 +224,9 @@ export function LoopSection() {
                   <h3 className="font-display text-balance mt-5 text-4xl leading-[1.05] sm:text-5xl lg:text-[3.5rem]">
                     {s.title}
                   </h3>
-                  <p className="text-pretty mt-5 max-w-lg text-lg text-ink-600">{s.text}</p>
+                  {s.text && (
+                    <p className="text-pretty mt-5 max-w-lg text-lg text-ink-600">{s.text}</p>
+                  )}
                   <span className="sr-only">Step {i + 1} of {stages.length}</span>
                 </div>
                 <div className="relative max-w-xl">
