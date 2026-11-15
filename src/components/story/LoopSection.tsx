@@ -174,6 +174,15 @@ export function LoopSection() {
         anticipatePin: 1,
       });
 
+      // The fish moves with a transform, not with `left`, so scrolling never triggers layout.
+      // The track width is measured once and again only when it resizes.
+      const track = marker.parentElement as HTMLElement;
+      let trackW = track.clientWidth;
+      const watch = new ResizeObserver(() => {
+        trackW = track.clientWidth;
+      });
+      watch.observe(track);
+
       const progress = { p: 0 };
       gsap.to(progress, {
         p: 1,
@@ -181,12 +190,14 @@ export function LoopSection() {
         onUpdate: () => {
           setActive(Math.min(stages.length - 1, Math.floor(progress.p * stages.length)));
           gsap.set(fill, { scaleX: progress.p });
-          gsap.set(marker, { left: `${progress.p * 100}%` });
+          gsap.set(marker, { x: progress.p * trackW });
         },
         scrollTrigger: { trigger: stage, start: "top top", end: "+=320%", scrub: 0.8 },
       });
 
       return () => {
+        watch.disconnect();
+        gsap.set(marker, { clearProps: "x" });
         el.setAttribute("data-loop", "static");
         items.forEach((n) => n.classList.remove("is-active"));
       };

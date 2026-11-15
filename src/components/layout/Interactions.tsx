@@ -22,6 +22,9 @@ export function Interactions() {
     if (!motionOk.matches) return;
 
     const ctx = gsap.context(() => {
+      // A firm settle with no overshoot: this is a site for finance buyers, so the pull
+      // eases back to rest instead of bouncing.
+      const SETTLE = { duration: 0.6, ease: "power3.out" } as const;
       const movers = new WeakMap<
         HTMLElement,
         { x: (v: number) => void; y: (v: number) => void; on: boolean }
@@ -30,8 +33,8 @@ export function Interactions() {
         let m = movers.get(el);
         if (!m) {
           m = {
-            x: gsap.quickTo(el, "x", { duration: 0.9, ease: "elastic.out(1, 0.45)" }),
-            y: gsap.quickTo(el, "y", { duration: 0.9, ease: "elastic.out(1, 0.45)" }),
+            x: gsap.quickTo(el, "x", SETTLE),
+            y: gsap.quickTo(el, "y", SETTLE),
             on: false,
           };
           movers.set(el, m);
@@ -42,51 +45,79 @@ export function Interactions() {
       let frame = 0;
       let last: PointerEvent | null = null;
 
+      // Reused every frame, so the pointer handler allocates nothing.
+      const fishVals: number[] = [];
+      const magVals: number[] = [];
+
       const run = () => {
         frame = 0;
         const e = last;
         if (!e) return;
 
         const card = (e.target as Element | null)?.closest<HTMLElement>("[data-spotlight]");
-        if (card) {
-          const r = card.getBoundingClientRect();
-          card.style.setProperty("--mx", `${e.clientX - r.left}px`);
-          card.style.setProperty("--my", `${e.clientY - r.top}px`);
-        }
+        const fishes = document.querySelectorAll<SVGElement>("svg[data-fish-eyes]");
+        const magnets = document.querySelectorAll<HTMLElement>("[data-magnetic]");
 
-        // The fish watches the cursor. The pupil moves a hair's breadth towards it.
-        document.querySelectorAll<SVGElement>("svg[data-fish-eyes]").forEach((fish) => {
-          const r = fish.getBoundingClientRect();
-          if (r.bottom < 0 || r.top > window.innerHeight) return;
+        // Read first, write after. Every measurement happens before any style is changed,
+        // so the browser works out layout once per frame instead of once per element.
+        const cardRect = card ? card.getBoundingClientRect() : null;
+
+        fishVals.length = 0;
+        for (let i = 0; i < fishes.length; i++) {
+          const r = fishes[i].getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) {
+            fishVals.push(NaN, NaN);
+            continue;
+          }
           const dx = e.clientX - (r.left + r.width * 0.25);
           const dy = e.clientY - (r.top + r.height * 0.37);
           const dist = Math.hypot(dx, dy) || 1;
           // The pupil can travel about 3 units inside the eye before it leaves the white.
           const reach = Math.min(1, dist / 220) * 3;
-          fish.style.setProperty("--ex", `${(dx / dist) * reach}px`);
-          fish.style.setProperty("--ey", `${(dy / dist) * reach}px`);
-        });
+          fishVals.push((dx / dist) * reach, (dy / dist) * reach);
+        }
 
-        document.querySelectorAll<HTMLElement>("[data-magnetic]").forEach((el) => {
-          const r = el.getBoundingClientRect();
-          const cx = r.left + r.width / 2;
-          const cy = r.top + r.height / 2;
-          const dx = e.clientX - cx;
-          const dy = e.clientY - cy;
+        magVals.length = 0;
+        for (let i = 0; i < magnets.length; i++) {
+          const r = magnets[i].getBoundingClientRect();
+          const dx = e.clientX - (r.left + r.width / 2);
+          const dy = e.clientY - (r.top + r.height / 2);
           const near =
             Math.abs(dx) < r.width / 2 + MAGNET_RADIUS &&
             Math.abs(dy) < r.height / 2 + MAGNET_RADIUS;
-          const m = moverFor(el);
-          if (near) {
+          magVals.push(
+            near ? 1 : 0,
+            Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, dx * MAGNET_PULL)),
+            Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, dy * MAGNET_PULL)),
+          );
+        }
+
+        // Writes.
+        if (card && cardRect) {
+          card.style.setProperty("--mx", `${e.clientX - cardRect.left}px`);
+          card.style.setProperty("--my", `${e.clientY - cardRect.top}px`);
+        }
+
+        // The fish watches the cursor. The pupil moves a hair's breadth towards it.
+        for (let i = 0; i < fishes.length; i++) {
+          const ex = fishVals[i * 2];
+          if (Number.isNaN(ex)) continue;
+          fishes[i].style.setProperty("--ex", `${ex}px`);
+          fishes[i].style.setProperty("--ey", `${fishVals[i * 2 + 1]}px`);
+        }
+
+        for (let i = 0; i < magnets.length; i++) {
+          const m = moverFor(magnets[i]);
+          if (magVals[i * 3] === 1) {
             m.on = true;
-            m.x(Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, dx * MAGNET_PULL)));
-            m.y(Math.max(-MAGNET_MAX, Math.min(MAGNET_MAX, dy * MAGNET_PULL)));
+            m.x(magVals[i * 3 + 1]);
+            m.y(magVals[i * 3 + 2]);
           } else if (m.on) {
             m.on = false;
             m.x(0);
             m.y(0);
           }
-        });
+        }
       };
 
       const onMove = (e: PointerEvent) => {
